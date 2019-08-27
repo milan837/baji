@@ -58,7 +58,7 @@ public class GameTitleController {
         response=new HashMap<>();
         List<GameTitle> teams=new ArrayList<>();
         repository.findAll().forEach(teams::add);
-        response.put("team",teams);
+        response.put("game",teams);
         response.put("status","200");
         response.put("message","list of team");
         return response;

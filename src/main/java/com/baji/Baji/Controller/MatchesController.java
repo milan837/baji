@@ -2,6 +2,7 @@ package com.baji.Baji.Controller;
 
 import com.baji.Baji.Model.*;
 import com.baji.Baji.Repository.*;
+import com.baji.Baji.Utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,8 @@ public class MatchesController {
     OpenBidsRepository openBidsRepository;
     @Autowired
     AcceptBidsRepository acceptBidsRepository;
+
+    int size= Constant.PAGE_SIZE;
 
     @PostMapping("/matches/add")
     public Map<String,Object> addTeam(@RequestBody Map<String,Object> request){
@@ -75,7 +78,7 @@ public class MatchesController {
                 Matches matches=repository.findById(matchesId).get();
 
                 //makeing response to open baji list elements
-                Page<OpenBids> openBids=openBidsRepository.findAllByMatchesIdAndActive(matches.getId(),0,PageRequest.of(0,3,Sort.by("id").descending()));
+                Page<OpenBids> openBids=openBidsRepository.findAllByMatchesIdAndActive(matches.getId(),0,PageRequest.of(0,size,Sort.by("id").descending()));
                 openBids.getContent().forEach(s->{
 
                     Map<String,Object> userDetails=new HashMap<>();
@@ -98,7 +101,7 @@ public class MatchesController {
                 //making list to onBoard baji list elements
 
                 List<Map> onBoardBajiList=new ArrayList<>();
-                Page<AcceptBids> acceptBids=acceptBidsRepository.findAllByMatchesId(matchesId,PageRequest.of(0,3,Sort.by("id").descending()));
+                Page<AcceptBids> acceptBids=acceptBidsRepository.findAllByMatchesId(matchesId,PageRequest.of(0,size,Sort.by("id").descending()));
                 acceptBids.getContent().forEach(s->{
                     Map<String,Object> teamOne=new HashMap<>();
                     Map<String,Object> teamTwo=new HashMap<>();
@@ -154,7 +157,7 @@ public class MatchesController {
         response=new HashMap<>();
         if(userRepository.existsByAuthKey(authKey)){
             List<Matches> matchesList=new ArrayList<>();
-            Page<Matches> matches=repository.findAll(PageRequest.of(0,4, Sort.by("id").descending()));
+            Page<Matches> matches=repository.findAll(PageRequest.of(0,size, Sort.by("id").descending()));
 
             matches.getContent().forEach(s->{
                 matchesList.add(s);
@@ -165,6 +168,45 @@ public class MatchesController {
             response.put("status","200");
             response.put("matches",matchesList);
             response.put("message","match list");
+        }else{
+            response.put("status","200");
+            response.put("message","invalid auth key");
+        }
+
+        return response;
+    }
+
+    @PostMapping("/matches/list/game_title/{gameTitleId}")
+    public Map<String,Object> getTeamList(@RequestHeader("Authorization") String authKey,@PathVariable("gameTitleId") int gameTitleId,@RequestBody Map<String,Object> request){
+        response=new HashMap<>();
+
+        if(userRepository.existsByAuthKey(authKey)){
+            List<Map> matchesList=new ArrayList<>();
+            if(request.containsKey("page")){
+                int page=Integer.valueOf(request.get("page").toString());
+                Page<Matches> matches=repository.findAllByGameTitleId(gameTitleId,PageRequest.of(page,size, Sort.by("id").descending()));
+
+                matches.getContent().forEach(s->{
+                    Map<String,Object> matchesObj=new HashMap<>();
+                    matchesObj.put("id",s.getId());
+                    matchesObj.put("timeStamp",s.getTimeStamp());
+                    matchesObj.put("winner",s.getWinnerTeam());
+                    matchesObj.put("teamOne",s.getTeamOne());
+                    matchesObj.put("teamTwo",s.getTeamTwo());
+
+                    matchesList.add(matchesObj);
+                });
+
+                response.put("page",matches.getNumber());
+                response.put("size",matches.getSize());
+                response.put("status","200");
+                response.put("matches",matchesList);
+                response.put("message","match list");
+            }else{
+                response.put("status","200");
+                response.put("message","play load missing key");
+            }
+
         }else{
             response.put("status","200");
             response.put("message","invalid auth key");

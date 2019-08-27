@@ -10,4 +10,5 @@ public interface MatchesRepository extends CrudRepository<Matches,Integer> {
     boolean existsByTeamOneIdAndTeamTwoIdAndGameTitleId(int teamOneId,int teamTwoId,int gameTitleId);
 
     Page<Matches> findAll(Pageable pageable);
+    Page<Matches> findAllByGameTitleId(int gameTitleId,Pageable pageable);
 }

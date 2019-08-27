@@ -28,6 +28,7 @@ public class OpenBidsController {
     @Autowired
     MatchesRepository matchesRepository;
 
+    int size=5;
 
     @PostMapping("/openbaji/create")
     public Map<String,Object> createOpenBid(@RequestHeader("Authorization") String authKey, @RequestBody Map<String,Object> request){
@@ -82,11 +83,65 @@ public class OpenBidsController {
             if (userRepository.existsByAuthKey(authKey)) {
                 if(request.containsKey("matchesId") && request.containsKey("page")){
                     int matchesId=Integer.valueOf(request.get("matchesId").toString());
+                    int page=Integer.valueOf(request.get("page").toString());
                     if(repository.existsById(matchesId)) {
                         Matches matches = matchesRepository.findById(matchesId).get();
                         List<Map> openBidsList = new ArrayList<>();
 
-                        Page<OpenBids> openBids=repository.findAllByMatchesIdAndActive(matches.getId(),0, PageRequest.of(0,4, Sort.by("id").descending()));
+                        Page<OpenBids> openBids=repository.findAllByMatchesIdAndActive(matches.getId(),0, PageRequest.of(page,size, Sort.by("id").descending()));
+
+                        openBids.getContent().forEach(s->{
+                            Map<String,Object> userDetails=new HashMap<>();
+                            Map<String,Object> openBidDetails=new HashMap<>();
+                            userDetails.put("id",s.getUser().getId());
+                            userDetails.put("username",s.getUser().getUsername());
+                            userDetails.put("imageUrl",s.getUser().getImageUrl());
+
+                            //formattting the response data
+                            openBidDetails.put("id",s.getId());
+                            openBidDetails.put("amount",s.getAmount());
+                            openBidDetails.put("timeStamp",s.getTimeStamp());
+
+                            openBidDetails.put("user",userDetails);
+                            openBidDetails.put("team",s.getTeam());
+                            openBidsList.add(openBidDetails);
+                        });
+
+                        response.put("size",openBids.getSize());
+                        response.put("page",openBids.getNumber());
+                        response.put("status", "200");
+                        response.put("message", "list of open bid of match id");
+                        response.put("openBids", openBidsList);
+
+                    }
+                }else{
+                    response.put("status", "200");
+                    response.put("message", "request body invalid");
+                }
+            } else {
+                response.put("status", "200");
+                response.put("message", "invalid auth key");
+            }
+        }else{
+            response.put("status","200");
+            response.put("message","auth key not specified");
+        }
+
+        return response;
+    }
+
+    @PostMapping("/openBaji/list/user")
+    public Map<String,Object> getOpenBajiPageByUserId(@RequestHeader("Authorization") String authKey,@RequestBody Map<String,Object> request){
+        response=new HashMap<>();
+        if(authKey != null && !authKey.isEmpty()) {
+            if (userRepository.existsByAuthKey(authKey)) {
+                if(request.containsKey("userId") && request.containsKey("page")){
+                    int userId=Integer.valueOf(request.get("userId").toString());
+                    int page=Integer.valueOf(request.get("page").toString());
+                    if(userRepository.existsById(userId)) {
+                        List<Map> openBidsList = new ArrayList<>();
+
+                        Page<OpenBids> openBids=repository.findAllByUserIdAndActive(userId,0, PageRequest.of(page,size, Sort.by("id").descending()));
 
                         openBids.getContent().forEach(s->{
                             Map<String,Object> userDetails=new HashMap<>();

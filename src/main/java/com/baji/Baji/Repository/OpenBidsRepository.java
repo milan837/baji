@@ -13,4 +13,5 @@ import java.util.List;
 public interface OpenBidsRepository extends CrudRepository<OpenBids,Integer> {
 
     Page<OpenBids> findAllByMatchesIdAndActive(int matchesId, int active,Pageable pageable);
+    Page<OpenBids> findAllByUserIdAndActive(int userId,int active,Pageable pageable);
 }
