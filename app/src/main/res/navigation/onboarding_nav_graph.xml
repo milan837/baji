@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_nav_graph"
+    app:startDestination="@id/phoneNumberFragment">
+
+    <fragment
+        android:id="@+id/phoneNumberFragment"
+        android:name="com.example.baji.OnBoardingActivity.PhoneNumberFragment.PhoneNumberFragment"
+        android:label="Phone Number Fragment"
+        tools:layout="@layout/fragment_onboarding_phone_number_layout">
+
+        <action
+            android:id="@+id/phoneNumberFragment_to_otpFragment"
+            app:destination="@id/otpFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="com.example.baji.OnBoardingActivity.OtpFragment.OtpFragment"
+        android:label="Otp Fragment"
+        tools:layout="@layout/fragment_onboarding_phone_number_layout">
+
+        <action
+            android:id="@+id/otpFragment_to_saveInfoFragment"
+            app:destination="@+id/saveInfoFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/saveInfoFragment"
+        android:name="com.example.baji.OnBoardingActivity.SaveInfoFragment.SaveInfoFragment"
+        android:label="Save User Information Fragment"
+        tools:layout="@layout/fragment_onboarding_phone_number_layout" />
+
+
+</navigation>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Baji</string>
+    <string name="title_activity_onboarding">OnboardingActivity</string>
+</resources>
