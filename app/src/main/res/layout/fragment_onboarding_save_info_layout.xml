@@ -1,13 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:background="@drawable/background_color_layout">
+    android:background="@drawable/background_color_layout"
+    android:paddingTop="20dp">
 
-    <TextView
-        android:id="@+id/textView"
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/back_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/back_arrow"/>
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="save info" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GIVE YOUR INFORMATION"
+            android:textColor="#FFF"
+            android:fontFamily="@font/semibold"
+            android:textSize="20dp"
+            />
+
+        <EditText
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:singleLine="true"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/phone_number"
+            android:hint="Username"
+            android:fontFamily="@font/medium"
+            android:textColorHint="#FFF"
+            android:textColor="#FFF"
+            android:textSize="16dp"
+            android:paddingLeft="20dp"
+            android:backgroundTint="#FFF"/>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Your Avater"
+            android:textColor="#FFF"
+            android:fontFamily="@font/semibold"
+            android:textSize="20dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/awater_recycler_view"/>
+
+
+    </LinearLayout>
+
+    <!-- next button -->
+    <androidx.cardview.widget.CardView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/next_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="3dp"
+        app:cardBackgroundColor="#FFF"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:padding="8dp"
+            android:background="@drawable/button_with_black_orange_bg">
+
+            <TextView
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textColor="#FFF"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="@font/bold"
+                android:textSize="18dp"/>
+
+            <ImageView
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_forward_black_24dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -1,14 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:background="@drawable/background_color_layout">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@drawable/background_color_layout"/>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/app_icon"
+                    android:src="@drawable/app_icon"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:layout_marginTop="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="WELCOME TO BAJI KARO"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/semibold"
+                    android:textSize="16dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardBackgroundColor="#FFF"
+                    app:cardElevation="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:padding="25dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Login with your phone \nnumber"
+                            android:textColor="#000"
+                            android:fontFamily="@font/bold"
+                            android:textSize="18dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+91"
+                                android:layout_marginLeft="10dp"
+                                android:textColor="#000"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/medium"
+                                android:textSize="16dp"/>
+
+                            <EditText
+                                android:singleLine="true"
+                                android:inputType="number"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:id="@+id/phone_number"
+                                android:hint="8050078113"
+                                android:fontFamily="@font/medium"
+                                android:textColorHint="@color/gray"
+                                android:textColor="#000"
+                                android:textSize="16dp"
+                                android:paddingLeft="50dp"/>
+
+                        </RelativeLayout>
+
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/next_button"
+                            android:layout_marginTop="50dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="3dp"
+                            app:cardBackgroundColor="#FFF"
+                            app:cardElevation="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:padding="8dp"
+                                android:background="@drawable/button_with_orange_pr_bg">
+
+                                <TextView
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Next"
+                                    android:textColor="#FFF"
+                                    android:layout_alignParentLeft="true"
+                                    android:fontFamily="@font/bold"
+                                    android:textSize="18dp"/>
+
+                                <ImageView
+                                    android:layout_marginRight="16dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_arrow_forward_black_24dp"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="119dp"
+        android:layout_marginLeft="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@android:string/emptyPhoneNumber" />
+        android:text="By continuing yo accept "
+        android:fontFamily="@font/medium"
+        android:textSize="14dp"
+        android:layout_marginBottom="3dp"
+        android:layout_above="@+id/terms_and_condition"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/terms_and_condition"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms &amp; condition"
+        android:textColor="@color/green"
+        android:fontFamily="@font/medium"
+        android:layout_marginBottom="10dp"
+        android:textSize="14dp"/>
+
+
+</RelativeLayout>

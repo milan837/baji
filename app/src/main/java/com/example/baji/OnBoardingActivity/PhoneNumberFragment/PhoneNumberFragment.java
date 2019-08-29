@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 
 import com.example.baji.BaseClasses.BaseFragment;
@@ -20,8 +21,8 @@ import butterknife.ButterKnife;
 
 public class PhoneNumberFragment extends BaseFragment {
 
-    @BindView(R.id.textView)
-    TextView textView;
+    @BindView(R.id.next_button)
+    CardView nextButton;
 
     @Nullable
     @Override
@@ -34,12 +35,13 @@ public class PhoneNumberFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.phoneNumberFragment_to_otpFragment);
             }
         });
+
 
     }
 

@@ -33,7 +33,9 @@
         android:id="@+id/saveInfoFragment"
         android:name="com.example.baji.OnBoardingActivity.SaveInfoFragment.SaveInfoFragment"
         android:label="Save User Information Fragment"
-        tools:layout="@layout/fragment_onboarding_phone_number_layout" />
+        tools:layout="@layout/fragment_onboarding_phone_number_layout" >
+
+    </fragment>
 
 
 </navigation>

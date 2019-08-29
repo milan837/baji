@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 
 import com.example.baji.BaseClasses.BaseFragment;
@@ -17,8 +19,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OtpFragment extends BaseFragment {
-    @BindView(R.id.textView)
-    TextView textView;
+
+    @BindView(R.id.next_button)
+    CardView nextButton;
+
+    @BindView(R.id.back_button)
+    RelativeLayout backButton;
 
     @Nullable
     @Override
@@ -31,11 +37,19 @@ public class OtpFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.otpFragment_to_saveInfoFragment);
             }
         });
+
     }
 }
