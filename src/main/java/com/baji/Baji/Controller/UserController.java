@@ -312,4 +312,10 @@ public class UserController {
         return response;
     }
 
+
+    @GetMapping("/test")
+    public String getTest(){
+        return "ok";
+    }
+
 }
