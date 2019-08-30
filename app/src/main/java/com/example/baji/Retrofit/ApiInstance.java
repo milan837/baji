@@ -17,13 +17,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiInstance {
     private static final String BASE_URL="";
 
-    public ApiCalls getInstance(){
+    public static ApiCalls getInstance(){
         Gson gson=new GsonBuilder().setLenient().create();
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new LoggingInterceptor())
                 .build();
         ApiCalls retrofitInstance=new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "78204573876",
+    "firebase_url": "https://challange-me.firebaseio.com",
+    "project_id": "challange-me",
+    "storage_bucket": "challange-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78204573876:android:2d78a8cf2d364198",
+        "android_client_info": {
+          "package_name": "com.example.baji"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78204573876-42bauvjmno4nsd9c7629si9v83nk4mn1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.baji",
+            "certificate_hash": "48669a314f14ed1c6fe75fe597918b9a0a5acb17"
+          }
+        },
+        {
+          "client_id": "78204573876-oskghpcf9qphtpf67326n5ec7burt0nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrZpnP-KN6eIX3muRr2sqga2dZ42gxwcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78204573876-oskghpcf9qphtpf67326n5ec7burt0nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

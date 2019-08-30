@@ -56,7 +56,7 @@
 
         <com.chaos.view.PinView
             android:layout_marginTop="30dp"
-            android:id="@+id/firstPinView"
+            android:id="@+id/otp_pin_view"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,10 +68,10 @@
             app:cursorColor="#FFF"
             app:cursorWidth="2dp"
             app:hideLineWhenFilled="true"
-            app:itemCount="5"
+            app:itemCount="6"
             app:itemHeight="48dp"
             app:itemSpacing="10dp"
-            app:itemWidth="50dp"
+            app:itemWidth="40dp"
             app:lineColor="#FFF"
             app:lineWidth="3dp"
             app:viewType="line" />

@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import com.example.baji.R;
+import com.google.firebase.FirebaseApp;
 
 public class OnboardingActivity extends BaseActivity {
 
