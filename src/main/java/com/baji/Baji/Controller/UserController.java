@@ -58,6 +58,7 @@ public class UserController {
                 response.put("user",user);
                 response.put("status","200");
                 response.put("message","register sucessfully");
+                response.put("test","milan");
             }
         }else{
             response.put("status","200");
