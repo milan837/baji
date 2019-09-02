@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/match_fragment_nav_graph"
+    app:startDestination="@id/matchListFragment">
+
+    <fragment
+        android:id="@+id/matchListFragment"
+        android:name="com.example.baji.HomeActivity.MatchesFragment.MatchesList.MatchListFragment"
+        android:label=""
+        tools:layout="@layout/fragment_home_match_list_layout">
+
+        <action
+            android:id="@+id/matchListFragment_to_matchProfileFragment"
+            app:destination="@+id/matchProfileFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/matchProfileFragment"
+        android:name="com.example.baji.HomeActivity.MatchesFragment.MatchProfile.MatchProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_home_match_profile_layout">
+
+
+    </fragment>
+
+</navigation>

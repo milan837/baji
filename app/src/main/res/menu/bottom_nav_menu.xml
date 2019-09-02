@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@raw/football"
+        android:title=""
+        android:id="@+id/nav_matches"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:icon="@raw/hammer"
+        android:title=""
+        android:id="@+id/nav_baji"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:icon="@raw/user_profile"
+        android:title=""
+        android:id="@+id/nav_profile"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:icon="@raw/setting"
+        android:title=""
+        android:id="@+id/nav_setting"
+        app:showAsAction="never"
+        />
+</menu>

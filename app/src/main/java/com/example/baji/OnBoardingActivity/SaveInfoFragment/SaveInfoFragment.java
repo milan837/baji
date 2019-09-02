@@ -1,10 +1,14 @@
 package com.example.baji.OnBoardingActivity.SaveInfoFragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,7 +22,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baji.BaseClasses.BaseFragment;
+import com.example.baji.HomeActivity.HomeActivity;
+import com.example.baji.OnBoardingActivity.SaveInfoFragment.Model.SaveUserInfoPojo;
 import com.example.baji.R;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +33,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SaveInfoFragment extends BaseFragment {
+public class SaveInfoFragment extends BaseFragment implements SaveInfoFragmentContract.View {
 
     @BindView(R.id.awater_recycler_view)
     RecyclerView awaterRecyclerView;
+
+    @BindView(R.id.username)
+    EditText username;
 
     @BindView(R.id.next_button)
     CardView nextButton;
@@ -39,6 +49,9 @@ public class SaveInfoFragment extends BaseFragment {
 
     AwaterListRecyclerViewAdapter adapter;
     List<String> awaterImageList=new ArrayList<>();
+    SaveInfoFragmentPresenter presenter;
+
+    String userId="",authKey="";
 
     @Nullable
     @Override
@@ -50,6 +63,9 @@ public class SaveInfoFragment extends BaseFragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        presenter=new SaveInfoFragmentPresenter(getActivity(),this);
+        userId=getArguments().getString("userId");
+        authKey=getArguments().getString("authKey");
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +85,18 @@ public class SaveInfoFragment extends BaseFragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(adapter.getSelectedAwater() != null){
-                    Log.i("milan_log",adapter.getSelectedAwater());
+                String getUsername=username.getText().toString().trim();
+                if(getUsername.isEmpty()){
+                    showLongToast(getActivity(),"please enter your name");
                 }else{
-                    showLongToast(getActivity(),"Please select your awater");
+                    if(adapter.getSelectedAwater() != null){
+                        callSaveInfoApi(getUsername,adapter.getSelectedAwater());
+                        Log.i("milan_log",adapter.getSelectedAwater());
+                    }else{
+                        showLongToast(getActivity(),"Please select your awater");
+                    }
                 }
+
             }
         });
 
@@ -96,5 +119,31 @@ public class SaveInfoFragment extends BaseFragment {
     }
 
 
+    private void callSaveInfoApi(String username,String imageUrl){
+        showProgress();
+        if(userId != null && authKey != null){
+            JsonObject jsonObject=new JsonObject();
+            jsonObject.addProperty("userId",Integer.valueOf(userId));
+            jsonObject.addProperty("username",username);
+            jsonObject.addProperty("imageUrl",imageUrl);
+            Log.i("linal_log_json",jsonObject.toString());
+            presenter.sendDataToApi(authKey,jsonObject);
+        }
+    }
+    @Override
+    public void displayResponse(SaveUserInfoPojo saveUserInfoPojo) {
+        dismissProgress();
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("phoneNumber",saveUserInfoPojo.getUserDetails().getPhoneNumber());
+        editor.putString("authKey",saveUserInfoPojo.getUserDetails().getAuthKey());
+        editor.putString("userId", String.valueOf(saveUserInfoPojo.getUserDetails().getId()));
+        editor.putString("imageUrl",saveUserInfoPojo.getUserDetails().getImageUrl());
+        editor.putString("username",saveUserInfoPojo.getUserDetails().getUsername());
+        editor.apply();
+        editor.commit();
 
+        Intent intent=new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
+    }
 }

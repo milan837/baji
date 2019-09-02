@@ -15,7 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiInstance {
-    private static final String BASE_URL="";
+    private static final String BASE_URL="https://baji-karo.herokuapp.com/";
 
     public static ApiCalls getInstance(){
         Gson gson=new GsonBuilder().setLenient().create();

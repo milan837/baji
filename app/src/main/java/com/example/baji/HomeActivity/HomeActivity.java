@@ -2,33 +2,76 @@ package com.example.baji.HomeActivity;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.baji.BaseClasses.BaseActivity;
+import com.example.baji.HomeActivity.BajiFragment.BajiFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesFragment;
+import com.example.baji.HomeActivity.ProfileFragment.ProfileFragment;
+import com.example.baji.HomeActivity.SettingFragment.SettingFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
-import android.view.View;
+import android.view.MenuItem;
 
 import com.example.baji.R;
 
-public class HomeActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class HomeActivity extends BaseActivity {
+
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        makeFullScreen();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        loadFragment(new MatchesFragment());
+
+        //loding fragment according to the nav bottom bar
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                Fragment fragment = null;
+
+                switch (item.getItemId()) {
+                    case R.id.nav_matches:
+                        fragment = new MatchesFragment();
+                        break;
+
+                    case R.id.nav_baji:
+                        fragment = new BajiFragment();
+                        break;
+
+                    case R.id.nav_profile:
+                        fragment = new ProfileFragment();
+                        break;
+
+                    case R.id.nav_setting:
+                        fragment = new SettingFragment();
+                        break;
+                }
+
+                return loadFragment(fragment);
             }
         });
+
+    }
+
+    public boolean loadFragment(Fragment fragment){
+        if(fragment != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,fragment)
+                    .commit();
+        }
+        return false;
     }
 
 }

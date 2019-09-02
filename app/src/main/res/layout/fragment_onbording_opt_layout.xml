@@ -21,7 +21,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/back_arrow"/>
+            android:src="@raw/back_arrow"/>
 
     </RelativeLayout>
 
@@ -48,6 +48,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/numer_dis_text_view"
             android:text="Please enter the verification code send to your mobile +977 XXX113"
             android:textColor="#FFF"
             android:fontFamily="@font/medium"

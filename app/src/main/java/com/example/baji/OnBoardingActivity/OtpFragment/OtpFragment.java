@@ -44,18 +44,22 @@ public class OtpFragment extends BaseFragment implements OptFragmentContract.Vie
     @BindView(R.id.otp_pin_view)
     PinView pinView;
 
-    String verificationId="",phoneNumber="8050078113";
+    @BindView(R.id.numer_dis_text_view)
+    TextView displayTxtWIthNmb;
+
+    String verificationId="",phoneNumber="";
     FirebaseAuth auth;
 
     OtpFragmentPresenter presenter;
 
     View fview;
 
+    //TODO: Include resend verification button in layout and functionalites
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        verificationId=getArguments().getString("verificationId");
-//        phoneNumber=getArguments().getString("phoneNumber");
+        verificationId=getArguments().getString("verificationId");
+        phoneNumber=getArguments().getString("phoneNumber");
         auth=FirebaseAuth.getInstance();
         return inflater.inflate(R.layout.fragment_onbording_opt_layout,container,false);
     }
@@ -67,7 +71,8 @@ public class OtpFragment extends BaseFragment implements OptFragmentContract.Vie
         this.presenter=new OtpFragmentPresenter(getActivity(),this);
         initViews(view);
         this.fview=view;
-        Log.i("milan_",verificationId+"=>"+phoneNumber);
+
+        displayTxtWIthNmb.setText("Please enter the verification code send to your mobile +91"+phoneNumber);
     }
 
     private void initViews(View view){
@@ -82,20 +87,20 @@ public class OtpFragment extends BaseFragment implements OptFragmentContract.Vie
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendDataToApi();
-//                String getOtp=pinView.getText().toString().trim();
-//                if(getOtp.isEmpty()){
-//                    showLongToast(getActivity(),"please enter the opt");
-//                }else{
-//                    showLongToast(getActivity(),getOtp);
-//                    firebaseOtpVerify(getOtp,v);
-//                }
+                String getOtp=pinView.getText().toString().trim();
+                if(getOtp.isEmpty()){
+                    showLongToast(getActivity(),"please enter the opt");
+                }else{
+                    showLongToast(getActivity(),getOtp);
+                    firebaseOtpVerify(getOtp,v);
+                }
             }
         });
 
     }
 
     private void firebaseOtpVerify(String otp,View view){
+        showProgress();
         PhoneAuthCredential credential= PhoneAuthProvider.getCredential(verificationId,otp);
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -123,8 +128,10 @@ public class OtpFragment extends BaseFragment implements OptFragmentContract.Vie
 
     @Override
     public void displayResponseData(UserRegisterPojo userRegisterPojo) {
+        dismissProgress();
         Log.i("milan_response", new Gson().toJson(userRegisterPojo));
         if(userRegisterPojo.getUser().getActive() == 1){
+
             SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString("phoneNumber",userRegisterPojo.getUser().getPhoneNumber());
@@ -140,7 +147,8 @@ public class OtpFragment extends BaseFragment implements OptFragmentContract.Vie
 
         }else if (userRegisterPojo.getUser().getActive() == 0){
             Bundle bundle=new Bundle();
-            bundle.putString("phoneNumber",phoneNumber);
+            bundle.putString("userId", String.valueOf(userRegisterPojo.getUser().getId()));
+            bundle.putString("authKey", userRegisterPojo.getUser().getAuthKey());
             Navigation.findNavController(fview).navigate(R.id.otpFragment_to_saveInfoFragment,bundle);
             showShortToast(getActivity(),"Verified Sucessfully");
         }
