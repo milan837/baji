@@ -35,7 +35,6 @@ public class MatchListRecyclerViewAdapter extends RecyclerView.Adapter<MatchList
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.textView.setText(list.get(position));
     }
 
     @Override
@@ -44,8 +43,7 @@ public class MatchListRecyclerViewAdapter extends RecyclerView.Adapter<MatchList
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.text)
-        TextView textView;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

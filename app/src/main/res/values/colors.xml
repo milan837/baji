@@ -7,4 +7,9 @@
     <color name="gray">#565050</color>
     <color name="green">#12A234</color>
 
+    <color name="appColor1">#FFe91e63</color>
+    <color name="appColor2">#FFFFA000</color>
+    <color name="textColor">#7A7A7A</color>
+
+
 </resources>

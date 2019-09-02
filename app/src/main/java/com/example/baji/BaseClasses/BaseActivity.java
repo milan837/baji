@@ -22,7 +22,8 @@ public class BaseActivity extends AppCompatActivity {
     private ProgressDialog dialog;
 
     public void preventScreenCapture() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     public void makeFullScreen(){

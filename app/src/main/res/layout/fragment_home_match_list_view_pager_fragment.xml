@@ -1,20 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/nestedScrollview"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="asdasd"
-        />
-
-
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/matchListRecyclerView"/>
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:layout_width="5dp"
+                android:layout_height="50dp"
+                android:background="#FFF"
+                android:id="@+id/bar"/>
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/game_title_name"
+                    android:textSize="18dp"
+                    android:text="Premmier League"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/semibold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/total_matches_list"
+                    android:textSize="14dp"
+                    android:text="12 Matches"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/medium"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchListRecyclerView"
+            android:focusableInTouchMode="false"
+            android:focusable="false"/>
+
+    </LinearLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

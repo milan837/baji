@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,8 @@ public class MatchListViewPagerFragment extends BaseFragment {
 
     @BindView(R.id.matchListRecyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.nestedScrollview)
+    NestedScrollView nestedScrollView;
 
     MatchListRecyclerViewAdapter adapter;
     List<String> list=new ArrayList<>();
@@ -47,9 +50,14 @@ public class MatchListViewPagerFragment extends BaseFragment {
     private void initViews(){
         addItems();
         adapter=new MatchListRecyclerViewAdapter(getActivity(),list);
-        recyclerView.setLayoutManager(new VegaLayoutManager());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.getAdapter().notifyDataSetChanged();
+
+        nestedScrollView.smoothScrollTo(0,0);
+        recyclerView.setFocusable(false);
+        nestedScrollView.setFocusable(true);
     }
 
     public void addItems(){

@@ -3,52 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="16dp">
-
-        <RelativeLayout
-            android:layout_centerVertical="true"
-            android:layout_width="5dp"
-            android:layout_height="50dp"
-            android:background="#FFF"
-            android:id="@+id/bar"/>
-
-        <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/game_title_name"
-                android:textSize="18dp"
-                android:text="Premmier League"
-                android:textColor="#FFF"
-                android:fontFamily="@font/semibold"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/total_matches_list"
-                android:textSize="14dp"
-                android:text="12 Matches"
-                android:textColor="#FFF"
-                android:fontFamily="@font/medium"/>
-
-        </LinearLayout>
-    </RelativeLayout>
-
     <androidx.viewpager.widget.ViewPager
-        android:layout_below="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/match_list_viewpager"/>
 
 </RelativeLayout>

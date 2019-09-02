@@ -8,15 +8,177 @@
     <androidx.cardview.widget.CardView
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:background="#000"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/match_time"
+                android:fontFamily="@font/semibold"
+                android:textSize="16dp"
+                android:text="11 Augest 2019"
+                android:textColor="@color/appColor1" />
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/match_studium"
+                android:fontFamily="@font/medium"
+                android:textSize="10dp"
+                android:text="Camp Nou Stadium"
+                android:textColor="@color/textColor" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- team one details -->
+
+                <LinearLayout
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@raw/teamone"
+                        android:id="@+id/team_one_image"/>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/team_one_name"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="12dp"
+                        android:text="FC Barcelona"
+                        android:textColor="@color/textColor" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="2"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="20dp"
+                        android:text="VS"
+                        android:textColor="@color/appColor1" />
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/game_time"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="12dp"
+                        android:text="11:30 PM"
+                        android:textColor="@color/textColor" />
+
+                </LinearLayout>
+
+                <!-- team two details -->
+                <LinearLayout
+                    android:paddingRight="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@raw/teamtwo"
+                        android:id="@+id/team_two_image"/>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/team_two_name"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="12dp"
+                        android:text="Real Madrid C.F."
+                        android:textColor="@color/textColor" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!-- dash border -->
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/dash_line"
+                android:layerType="software"
+                />
+
+            <RelativeLayout
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/total_baji"
+                    android:fontFamily="@font/semibold"
+                    android:textSize="12dp"
+                    android:text="Total Baji : 20"
+                    android:textColor="@color/green" />
+
+                <Button
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:elevation="3dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="120dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/baji_now_button"
+                    android:text="Baji Now"
+                    android:textAllCaps="false"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/semibold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#FFF"
+                    android:background="@drawable/green_button"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
 
     </androidx.cardview.widget.CardView>
 
