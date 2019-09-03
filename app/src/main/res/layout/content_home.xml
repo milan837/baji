@@ -22,7 +22,8 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/background_color_layout"
         app:itemIconTint="@drawable/bottom_nav_color"
-        app:elevation="30dp"
+        app:elevation="50dp"
+        android:elevation="50dp"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="unlabeled"/>
 
