@@ -7,14 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baji.BaseClasses.BaseFragment;
-import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWIthMatchResponsePojo;
-import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Matches;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Game;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWithMatchListResponsePojo;
 import com.example.baji.R;
 
 import java.util.ArrayList;
@@ -23,17 +22,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MatchListFragment extends BaseFragment {
+public class MatchListFragment extends BaseFragment implements MatchesListFragmentContract.View {
 
     @BindView(R.id.game_with_match_recycler_view)
-            RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
-    List<Matches> matchesList=new ArrayList<>();
-    List<GameWIthMatchResponsePojo> gameWIthMatchResponsePojosList=new ArrayList<>();
     MatchesListWithGameTitleRecyclerViewAdapter adapter;
-
-
-    View Fview;
+    MatchesListFragmentPresenter presenter;
+    List<Game> gameList=new ArrayList<>();
 
     @Nullable
     @Override
@@ -45,12 +41,15 @@ public class MatchListFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        presenter=new MatchesListFragmentPresenter(getActivity(),this);
         initViews();
     }
 
     private void initViews(){
-        addItems();
-        adapter=new MatchesListWithGameTitleRecyclerViewAdapter(getActivity(),gameWIthMatchResponsePojosList);
+        presenter.sendDataToApi();
+        showProgress();
+
+        adapter=new MatchesListWithGameTitleRecyclerViewAdapter(getActivity(),gameList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
@@ -58,22 +57,12 @@ public class MatchListFragment extends BaseFragment {
 
     }
 
-    public void addItems(){
-        matchesList.add(new Matches(1,"Fc Barcelona","Fc Real Madrid"));
-        matchesList.add(new Matches(2,"Fc Arcenal","Manchester United"));
-        matchesList.add(new Matches(3,"Manchester City","Fc Real Madrid"));
-        matchesList.add(new Matches(4,"PSG FC","Fc Real Madrid"));
-        matchesList.add(new Matches(5,"Liverpool","FC Totanum"));
-        matchesList.add(new Matches(6,"Fc Barcelona","FC Chelase"));
 
-        gameWIthMatchResponsePojosList.add(new GameWIthMatchResponsePojo("UFEA Champions",7,1,matchesList));
-        gameWIthMatchResponsePojosList.add(new GameWIthMatchResponsePojo("La Liga",6,2,matchesList));
-        gameWIthMatchResponsePojosList.add(new GameWIthMatchResponsePojo("Boundes Liga",4,3,matchesList));
-        gameWIthMatchResponsePojosList.add(new GameWIthMatchResponsePojo("Europa Champions Leauge",7,4,matchesList));
-        gameWIthMatchResponsePojosList.add(new GameWIthMatchResponsePojo("World Cup",5,5,matchesList));
 
+    @Override
+    public void displayResponse(GameWithMatchListResponsePojo gameWithMatchListResponsePojo) {
+        dismissProgress();
+        gameList.addAll(gameWithMatchListResponsePojo.getGames());
+        adapter.notifyDataSetChanged();
     }
-
-
-
 }

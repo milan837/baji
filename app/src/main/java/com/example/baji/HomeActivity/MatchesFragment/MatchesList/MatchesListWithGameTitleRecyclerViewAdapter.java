@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWIthMatchResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Game;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWithMatchListResponsePojo;
 import com.example.baji.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,12 +25,12 @@ import butterknife.ButterKnife;
 public class MatchesListWithGameTitleRecyclerViewAdapter extends RecyclerView.Adapter<MatchesListWithGameTitleRecyclerViewAdapter.MyViewHolder> {
 
     Context context;
-    List<GameWIthMatchResponsePojo> gameWIthMatchResponsePojos;
+    List<Game> gameList;
     MatchListRecyclerViewAdapter adapter;
 
-    public MatchesListWithGameTitleRecyclerViewAdapter(Context context, List<GameWIthMatchResponsePojo> gameWIthMatchResponsePojos) {
+    public MatchesListWithGameTitleRecyclerViewAdapter(Context context,List<Game> gameList) {
         this.context = context;
-        this.gameWIthMatchResponsePojos = gameWIthMatchResponsePojos;
+        this.gameList=gameList;
     }
 
     @NonNull
@@ -41,13 +41,14 @@ public class MatchesListWithGameTitleRecyclerViewAdapter extends RecyclerView.Ad
 
     @Override
     public void onBindViewHolder(@NonNull MatchesListWithGameTitleRecyclerViewAdapter.MyViewHolder holder, int position) {
+        Game game=gameList.get(position);
 
-        holder.gameTitleName.setText(gameWIthMatchResponsePojos.get(position).getGameTitle());
-        holder.totalMatches.setText(String.valueOf(gameWIthMatchResponsePojos.get(position).getTotalMatches())+" Matches");
+        holder.gameTitleName.setText(game.getName());
+        holder.totalMatches.setText(String.valueOf(game.getMatches().size())+" Matches");
 
 
 
-        adapter=new MatchListRecyclerViewAdapter(context,gameWIthMatchResponsePojos.get(position).getMatches());
+        adapter=new MatchListRecyclerViewAdapter(context,game.getMatches(),game.getName());
         holder.matchListRecyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.matchListRecyclerView.setAdapter(adapter);
         SnapHelper snapHelper = new PagerSnapHelper();
@@ -57,17 +58,11 @@ public class MatchesListWithGameTitleRecyclerViewAdapter extends RecyclerView.Ad
 
         holder.matchListRecyclerView.setFocusable(false);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.matchListFragment_to_matchProfileFragment);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return gameWIthMatchResponsePojos.size();
+        return gameList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

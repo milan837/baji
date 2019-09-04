@@ -14,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.baji.BaseClasses.BaseFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.BajiOnboardListFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.CreateNewBaij.CreateNewBajiBottomFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.OpenBajiListFragment;
@@ -66,6 +68,11 @@ public class MatchesProfileFragment extends BaseFragment {
     List<String> pageTitleList=new ArrayList<>();
     List<Fragment> fragmentList=new ArrayList<>();
 
+    Match match;
+    String gameTitle,totalMatches;
+    int matchId;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,6 +83,13 @@ public class MatchesProfileFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+
+        match=(Match)getArguments().getSerializable("matches");
+        gameTitle=getArguments().getString("gameTitle");
+        totalMatches=getArguments().getString("totalMatches");
+        matchId=match.getId();
+
+        setDataToView();
         initViews();
     }
 
@@ -91,7 +105,8 @@ public class MatchesProfileFragment extends BaseFragment {
         pageTitleList.add("Baji Onboard");
 
         Bundle bundle=new Bundle();
-        bundle.putInt("matchesId",2);
+        bundle.putInt("matchesId",matchId);
+        bundle.putSerializable("match",match);
 
         OpenBajiListFragment openBajiListFragment=new OpenBajiListFragment();
         BajiOnboardListFragment bajiOnBoardListFragment=new BajiOnboardListFragment();
@@ -115,6 +130,15 @@ public class MatchesProfileFragment extends BaseFragment {
             }
         });
 
+    }
+
+    private void setDataToView(){
+        teamOneName.setText(match.getTeamOne().getName());
+        teamTwoName.setText(match.getTeamTwo().getName());
+        matchesDate.setText(match.getTimeStamp());
+        totalBaji.setText("Total Baji: 20");
+        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamOneLogo);
+        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamTwoLogo);
     }
 
 }

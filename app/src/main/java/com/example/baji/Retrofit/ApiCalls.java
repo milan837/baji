@@ -1,5 +1,6 @@
 package com.example.baji.Retrofit;
 
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWithMatchListResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.BajiOnboardResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
 import com.example.baji.OnBoardingActivity.OtpFragment.Model.UserRegisterPojo;
@@ -8,6 +9,7 @@ import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
@@ -25,4 +27,7 @@ public interface ApiCalls {
 
     @POST("/onboard/baji/list")
     Call<BajiOnboardResponsePojo> getOnboardBajiListResponse(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
+
+    @GET("game/match/list")
+    Call<GameWithMatchListResponsePojo> getGameAndMatchesList();
 }
