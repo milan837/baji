@@ -176,6 +176,7 @@ public class MatchesController {
         return response;
     }
 
+    // return the list of matches based on games id ex UEFA=>Match1,match2...
     @PostMapping("/matches/list/game_title/{gameTitleId}")
     public Map<String,Object> getTeamList(@RequestHeader("Authorization") String authKey,@PathVariable("gameTitleId") int gameTitleId,@RequestBody Map<String,Object> request){
         response=new HashMap<>();

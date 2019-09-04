@@ -19,4 +19,8 @@ public interface AcceptBidsRepository extends CrudRepository<AcceptBids,Integer>
 
     Page<AcceptBids> findAllByUserId(int userId,Pageable pageable);
 
+    Page<AcceptBids> findAll(Pageable pageable);
+
+
+
 }
