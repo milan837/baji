@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.baji.HomeActivity.HomeActivity;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.AcceptBaji.AcceptBajiBottomFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.MatchesProfileFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBid;
 import com.example.baji.R;
 
@@ -46,6 +49,13 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
         holder.teamName.setText(bid.getTeam().getName());
 
         Glide.with(context).load(bid.getUser().getImageUrl()).into(holder.profilePic);
+        holder.acceptBajiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AcceptBajiBottomFragment acceptBajiBottomFragment=AcceptBajiBottomFragment.getInstance();
+                acceptBajiBottomFragment.show(((HomeActivity)context).getSupportFragmentManager(),"acceptBajiFragment");
+            }
+        });
     }
 
     @Override

@@ -110,7 +110,8 @@ public class MatchesProfileFragment extends BaseFragment {
         createNewBaji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateNewBajiBottomFragment.getInstance().show(getChildFragmentManager(),"createNewBajiFragment");
+                CreateNewBajiBottomFragment createNewBajiBottomFragment=CreateNewBajiBottomFragment.getInstance();
+                createNewBajiBottomFragment.show(getChildFragmentManager(),"createNewBajiFragment");
             }
         });
 
