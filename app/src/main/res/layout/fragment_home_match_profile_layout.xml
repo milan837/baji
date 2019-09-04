@@ -272,7 +272,7 @@
                         android:layout_width="120dp"
                         android:layout_height="35dp"
                         android:id="@+id/baji_now_button"
-                        android:text="Baji Now"
+                        android:text="Create Baji"
                         android:textAllCaps="false"
                         android:textSize="12dp"
                         android:fontFamily="@font/semibold"

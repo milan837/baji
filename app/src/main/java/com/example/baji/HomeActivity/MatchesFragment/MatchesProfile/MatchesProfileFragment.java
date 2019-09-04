@@ -1,5 +1,6 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.baji.BaseClasses.BaseFragment;
-import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.BajiOnBoardListFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.BajiOnboardListFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.CreateNewBaij.CreateNewBajiBottomFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.OpenBajiListFragment;
 import com.example.baji.R;
 import com.google.android.material.tabs.TabLayout;
@@ -26,7 +27,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MatchProfileFragment extends BaseFragment {
+import static androidx.fragment.app.DialogFragment.STYLE_NORMAL;
+
+public class MatchesProfileFragment extends BaseFragment {
 
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
@@ -57,11 +60,9 @@ public class MatchProfileFragment extends BaseFragment {
 
     @BindView(R.id.team_two_image)
     ImageView teamTwoLogo;
-//
-//    @BindView(R.id.nestedScrollView)
-//    NestedScrollView nestedScrollView;
 
-    MatchProfileViewPagerAdapter matchProfileViewPagerAdapter;
+
+    MatchesProfileViewPagerAdapter matchesProfileViewPagerAdapter;
     List<String> pageTitleList=new ArrayList<>();
     List<Fragment> fragmentList=new ArrayList<>();
 
@@ -78,18 +79,41 @@ public class MatchProfileFragment extends BaseFragment {
         initViews();
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        matchesProfileViewPagerAdapter = new MatchesProfileViewPagerAdapter(getChildFragmentManager());
+    }
+
     private void initViews(){
-        //nestedScrollView.setFillViewport(true);
+
         pageTitleList.add("Open Baji");
         pageTitleList.add("Baji Onboard");
 
-        fragmentList.add(new OpenBajiListFragment());
-        fragmentList.add(new BajiOnBoardListFragment());
+        Bundle bundle=new Bundle();
+        bundle.putInt("matchesId",2);
 
-        matchProfileViewPagerAdapter=new MatchProfileViewPagerAdapter(getActivity().getSupportFragmentManager());
-        matchProfileViewPagerAdapter.addFragment(pageTitleList,fragmentList);
-        viewPager.setAdapter(matchProfileViewPagerAdapter);
+        OpenBajiListFragment openBajiListFragment=new OpenBajiListFragment();
+        BajiOnboardListFragment bajiOnBoardListFragment=new BajiOnboardListFragment();
+
+        openBajiListFragment.setArguments(bundle);
+        bajiOnBoardListFragment.setArguments(bundle);
+
+        fragmentList.add(openBajiListFragment);
+        fragmentList.add(bajiOnBoardListFragment);
+
+        matchesProfileViewPagerAdapter.addFragment(pageTitleList,fragmentList);
+        viewPager.setAdapter(matchesProfileViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        matchProfileViewPagerAdapter.notifyDataSetChanged();
+        matchesProfileViewPagerAdapter.notifyDataSetChanged();
+
+        createNewBaji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateNewBajiBottomFragment.getInstance().show(getChildFragmentManager(),"createNewBajiFragment");
+            }
+        });
+
     }
+
 }

@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/matchProfileFragment"
-        android:name="com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.MatchProfileFragment"
+        android:name="com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.MatchesProfileFragment"
         android:label=""
         tools:layout="@layout/fragment_home_match_profile_layout">
 

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import java.io.File;
 
 public class BaseFragment extends Fragment {
-    private ProgressDialog dialog;
+    public ProgressDialog dialog;
 
     public void preventScreenCapture() {
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);

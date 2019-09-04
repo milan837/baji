@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-public class MatchProfileViewPagerAdapter extends FragmentPagerAdapter {
+public class MatchesProfileViewPagerAdapter extends FragmentPagerAdapter {
     List<Fragment> fragmentList;
     List<String> pageTitle;
 
-    public MatchProfileViewPagerAdapter(@NonNull FragmentManager fm) {
+    public MatchesProfileViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
 

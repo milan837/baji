@@ -1,5 +1,7 @@
 package com.example.baji.Retrofit;
 
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.BajiOnboardResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
 import com.example.baji.OnBoardingActivity.OtpFragment.Model.UserRegisterPojo;
 import com.example.baji.OnBoardingActivity.SaveInfoFragment.Model.SaveUserInfoPojo;
 import com.google.gson.JsonObject;
@@ -16,4 +18,11 @@ public interface ApiCalls {
 
     @POST("user/saveInfo")
     Call<SaveUserInfoPojo> saveUserInfo(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
+
+    //-------------------------------------- matches api -------------------------------------------
+    @POST("openBaji/list")
+    Call<OpenBajiResponsePojo> getOpenBajiListResponse(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
+
+    @POST("/onboard/baji/list")
+    Call<BajiOnboardResponsePojo> getOnboardBajiListResponse(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
 }
