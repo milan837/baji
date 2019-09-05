@@ -3,7 +3,7 @@ package com.example.baji.HomeActivity;
 import android.os.Bundle;
 
 import com.example.baji.BaseClasses.BaseActivity;
-import com.example.baji.HomeActivity.BajiFragment.BajiFragment;
+import com.example.baji.HomeActivity.ActiveBajiListFragment.ActiveBajiListFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesFragment;
 import com.example.baji.HomeActivity.ProfileFragment.ProfileFragment;
 import com.example.baji.HomeActivity.SettingFragment.SettingFragment;
@@ -46,7 +46,7 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.nav_baji:
-                        fragment = new BajiFragment();
+                        fragment = new ActiveBajiListFragment();
                         break;
 
                     case R.id.nav_profile:

@@ -59,7 +59,7 @@
         android:id="@+id/teamRadioGroup">
 
         <RadioButton
-            android:id="@+id/team_one"
+            android:id="@+id/team_one_radio_btn"
             android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:text="FC Barcelona"/>
 
         <RadioButton
-            android:id="@+id/team_two"
+            android:id="@+id/team_two_radio_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"

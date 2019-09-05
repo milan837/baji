@@ -1,11 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView3"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="baji" />
-</LinearLayout>
+        android:layout_height="300dp"
+        android:background="@drawable/background_cutter_layout"
+        />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:layout_width="5dp"
+                android:layout_height="50dp"
+                android:background="#FFF"
+                android:id="@+id/bar"/>
+
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/game_title_name"
+                    android:textSize="18dp"
+                    android:text="All Baji Onboard"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/semibold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/total_baji_list"
+                    android:textSize="14dp"
+                    android:text="Total 200"
+                    android:textColor="#FFF"
+                    android:fontFamily="@font/medium"/>
+
+            </LinearLayout>
+
+            <!-- notication button-->
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/notification_icon"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@raw/notification"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/activeBajiListRecyclerView"
+            android:focusableInTouchMode="false"
+            android:focusable="false"/>
+
+    </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.baji.HomeActivity.HomeActivity;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.AcceptBaji.AcceptBajiBottomFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.MatchesProfileFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBid;
@@ -27,10 +29,12 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
 
     Context context;
     List<OpenBid> openBidsList;
+    Match match;
 
-    public OpenBajiRecyclerViewAdapter(Context context, List<OpenBid> openBidsList) {
+    public OpenBajiRecyclerViewAdapter(Context context, List<OpenBid> openBidsList,Match match) {
         this.context = context;
         this.openBidsList=openBidsList;
+        this.match=match;
     }
 
 
@@ -52,7 +56,15 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
         holder.acceptBajiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("match",match);
+                bundle.putInt("openBajiId",bid.getId());
+                bundle.putString("username",bid.getUser().getUsername());
+                bundle.putString("teamName",bid.getTeam().getName());
+                bundle.putDouble("amount",bid.getAmount());
+
                 AcceptBajiBottomFragment acceptBajiBottomFragment=AcceptBajiBottomFragment.getInstance();
+                acceptBajiBottomFragment.setArguments(bundle);
                 acceptBajiBottomFragment.show(((HomeActivity)context).getSupportFragmentManager(),"acceptBajiFragment");
             }
         });

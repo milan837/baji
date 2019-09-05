@@ -1,5 +1,6 @@
 package com.example.baji.Retrofit;
 
+import com.example.baji.HomeActivity.ActiveBajiListFragment.Model.ActiveBajiListResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWithMatchListResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.BajiOnboardResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
@@ -25,9 +26,12 @@ public interface ApiCalls {
     @POST("openBaji/list")
     Call<OpenBajiResponsePojo> getOpenBajiListResponse(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
 
-    @POST("/onboard/baji/list")
+    @POST("onboard/baji/list")
     Call<BajiOnboardResponsePojo> getOnboardBajiListResponse(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
 
     @GET("game/match/list")
     Call<GameWithMatchListResponsePojo> getGameAndMatchesList();
+
+    @POST("active/onboardbaji/list")
+    Call<ActiveBajiListResponsePojo> getAllActiveBajiList(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
 }

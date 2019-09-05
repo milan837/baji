@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baji.BaseClasses.BaseFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBid;
 import com.example.baji.R;
@@ -31,6 +32,7 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     OpenBajiRecyclerViewAdapter adapter;
     List<OpenBid> openBidList=new ArrayList<>();
     OpenBajiListFragmentPresenter presenter;
+    Match match;
 
     int matchesId=2,page=0;
 
@@ -44,6 +46,7 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         matchesId=getArguments().getInt("matchesId");
+        match=(Match)getArguments().getSerializable("match");
 
         ButterKnife.bind(this,view);
         presenter=new OpenBajiListFragmentPresenter(getActivity(),this);
@@ -53,7 +56,7 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     private void initViews(){
         callApi(matchesId,page);
 
-        adapter=new OpenBajiRecyclerViewAdapter(getActivity(),openBidList);
+        adapter=new OpenBajiRecyclerViewAdapter(getActivity(),openBidList,match);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

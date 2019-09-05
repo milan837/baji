@@ -1,17 +1,23 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.CreateNewBaij;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.PaymentMethodBottomFragment;
 import com.example.baji.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -27,8 +33,22 @@ public class CreateNewBajiBottomFragment extends BottomSheetDialogFragment {
     @BindView(R.id.amount_spinner)
     Spinner spinner;
 
+    @BindView(R.id.team_one_radio_btn)
+    RadioButton teamOneBtn;
+
+    @BindView(R.id.team_two_radio_btn)
+    RadioButton teamTwoBtn;
+
+    @BindView(R.id.teamRadioGroup)
+    RadioGroup radioGroup;
+
+
+
     String[] amount={"10","20","30","40","50","60","70","80","90","100"};
     ArrayAdapter<String> amountSpinnerAdapter;
+    String selectedAmount="";
+
+    Match match;
 
     @Nullable
     @Override
@@ -40,20 +60,62 @@ public class CreateNewBajiBottomFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        initViews();
+        match=(Match)getArguments().getSerializable("matches");
+        initViews(view);
     }
 
-    private void initViews(){
+    private void initViews(View view){
         amountSpinnerAdapter=new ArrayAdapter<>(getActivity(),R.layout.adapter_spinner,amount);
         spinner.setAdapter(amountSpinnerAdapter);
+
+        teamOneBtn.setText(match.getTeamOne().getName());
+        teamTwoBtn.setText(match.getTeamTwo().getName());
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedAmount=amount[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PaymentMethodBottomFragment paymentMethodBottomFragment=PaymentMethodBottomFragment.getInstance();
-                paymentMethodBottomFragment.show(getChildFragmentManager(),"paymentBottomFragment");
+                String selectedTeamName="";
+                RadioButton radioButton=view.findViewById(radioGroup.getCheckedRadioButtonId());
+                selectedTeamName=radioButton.getText().toString();
+
+
+                int selectedTeamId=0;
+
+                if(selectedTeamName.toLowerCase().trim().equals(match.getTeamOne().getName().toLowerCase().trim())){
+                    selectedTeamId=match.getTeamOne().getId();
+                }else if(selectedTeamName.toLowerCase().trim().equals(match.getTeamTwo().getName().toLowerCase().trim())){
+                    selectedTeamId=match.getTeamTwo().getId();
+                }
+
+                if(selectedTeamName.isEmpty()){
+                    Toast.makeText(getActivity(),"please select one team",Toast.LENGTH_LONG).show();
+                }else if(selectedAmount.isEmpty()){
+                    Toast.makeText(getActivity(),"please select the amount",Toast.LENGTH_LONG).show();
+                }else{
+                    Bundle bundle=new Bundle();
+                    bundle.putString("matchId",String.valueOf(match.getId()));
+                    bundle.putString("amount",selectedAmount);
+                    bundle.putString("teamId", String.valueOf(selectedTeamId));
+                    //create new baji further process
+                }
+
             }
         });
+
+
     }
 
     public static CreateNewBajiBottomFragment getInstance(){
