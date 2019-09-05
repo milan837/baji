@@ -2,6 +2,7 @@ package com.baji.Baji.Controller;
 
 
 import com.baji.Baji.Model.AcceptBids;
+import com.baji.Baji.Model.GameTitle;
 import com.baji.Baji.Model.Matches;
 import com.baji.Baji.Model.OpenBids;
 import com.baji.Baji.Repository.*;
@@ -249,6 +250,7 @@ public class AcceptBidsController {
                         onBoardBaji.put("amount",s.getOpenBids().getAmount());
                         onBoardBaji.put("timeStamp",s.getTimeStamp());
                         onBoardBaji.put("id",s.getId());
+                        onBoardBaji.put("gameTitle",s.getMatches().getGameTitle().getName());
                         onBoardBaji.put("teamOne",teamOne);
                         onBoardBaji.put("teamTwo",teamTwo);
 
