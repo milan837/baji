@@ -1,11 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/background_cutter_layout">
 
-    <TextView
-        android:id="@+id/textView"
+    </RelativeLayout>
+
+    <!-- tool bar -->
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp">
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:background="#FFF"
+            android:id="@+id/bar"/>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_title_name"
+            android:textSize="18dp"
+            android:layout_marginLeft="16dp"
+            android:text="Setting"
+            android:textColor="#FFF"
+            android:fontFamily="@font/semibold"/>
+
+
+        <!-- notication button-->
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/notification_icon"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@raw/notification"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- match details Layout -->
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/top_bar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="setting" />
-</LinearLayout>
+        android:background="#000"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/watch_demo"
+                android:textSize="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Watch Demo"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/semibold"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/about_us"
+                android:textSize="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="About Us"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/semibold"/>
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contact_us"
+                android:textSize="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Contact Us"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/semibold"/>
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedback"
+                android:textSize="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="feedback"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/semibold"/>
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/terms_and_condition"
+                android:textSize="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Terms &amp; Condition"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/semibold"/>
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout"
+                android:textSize="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Logout"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/semibold"/>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

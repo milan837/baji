@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,28 +41,37 @@ public class MatchesProfileFragment extends BaseFragment {
     ViewPager viewPager;
 
     @BindView(R.id.team_one_name)
-    TextView teamOneName;
+    TextView teamOneNameTxt;
 
     @BindView(R.id.team_two_name)
-    TextView teamTwoName;
+    TextView teamTwoNameTxt;
 
     @BindView(R.id.matches_time)
-    TextView matchesTime;
+    TextView matchesTimeTxt;
 
     @BindView(R.id.matches_date)
-    TextView matchesDate;
+    TextView matchesDateTxt;
 
     @BindView(R.id.total_baji)
-    TextView totalBaji;
+    TextView totalBajiTxt;
 
     @BindView(R.id.baji_now_button)
     Button createNewBaji;
 
     @BindView(R.id.team_one_image)
-    ImageView teamOneLogo;
+    ImageView teamOneLogoImg;
 
     @BindView(R.id.team_two_image)
-    ImageView teamTwoLogo;
+    ImageView teamTwoLogoImg;
+
+    @BindView(R.id.game_title_name)
+            TextView gameTitleTxt;
+
+    @BindView(R.id.total_matches_list)
+    TextView totalMatchesTxt;
+
+    @BindView(R.id.back_button)
+    RelativeLayout backButton;
 
 
     MatchesProfileViewPagerAdapter matchesProfileViewPagerAdapter;
@@ -133,15 +143,24 @@ public class MatchesProfileFragment extends BaseFragment {
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStackImmediate();
+            }
+        });
+
     }
 
     private void setDataToView(){
-        teamOneName.setText(match.getTeamOne().getName());
-        teamTwoName.setText(match.getTeamTwo().getName());
-        matchesDate.setText(match.getTimeStamp());
-        totalBaji.setText("Total Baji: 20");
-        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamOneLogo);
-        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamTwoLogo);
+        gameTitleTxt.setText(gameTitle);
+        totalMatchesTxt.setText(totalMatches+" Matches");
+        teamOneNameTxt.setText(match.getTeamOne().getName());
+        teamTwoNameTxt.setText(match.getTeamTwo().getName());
+        matchesDateTxt.setText(match.getTimeStamp());
+        totalBajiTxt.setText("Total Baji: 20");
+        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamOneLogoImg);
+        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamTwoLogoImg);
     }
 
 }

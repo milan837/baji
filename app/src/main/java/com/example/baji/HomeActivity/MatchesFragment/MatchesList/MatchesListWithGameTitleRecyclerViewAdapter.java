@@ -52,6 +52,7 @@ public class MatchesListWithGameTitleRecyclerViewAdapter extends RecyclerView.Ad
         holder.matchListRecyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.matchListRecyclerView.setAdapter(adapter);
         SnapHelper snapHelper = new PagerSnapHelper();
+        holder.matchListRecyclerView.setOnFlingListener(null);
         snapHelper.attachToRecyclerView(holder.matchListRecyclerView);
         holder.matchListRecyclerView.setNestedScrollingEnabled(false);
         holder.matchListRecyclerView.getAdapter().notifyDataSetChanged();

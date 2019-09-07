@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.MenuItem;
 
@@ -23,6 +24,13 @@ public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
+    MatchesFragment fragment1 = new MatchesFragment();
+    ActiveBajiListFragment fragment2 = new ActiveBajiListFragment();
+    ProfileFragment fragment3 = new ProfileFragment();
+    SettingFragment fragment4 = new SettingFragment();
+
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +39,8 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        loadFragment(new MatchesFragment());
+        //loadFragment(new MatchesFragment());
+        loadAllFragment();
 
         //loding fragment according to the nav bottom bar
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,23 +51,27 @@ public class HomeActivity extends BaseActivity {
 
                 switch (item.getItemId()) {
                     case R.id.nav_matches:
-                        fragment = new MatchesFragment();
-                        break;
+                        fm.beginTransaction().hide(active).show(fragment1).commit();
+                        active = fragment1;
+                        return true;
 
                     case R.id.nav_baji:
-                        fragment = new ActiveBajiListFragment();
-                        break;
+                        fm.beginTransaction().hide(active).show(fragment2).commit();
+                        active = fragment2;
+                        return true;
 
                     case R.id.nav_profile:
-                        fragment = new ProfileFragment();
-                        break;
+                        fm.beginTransaction().hide(active).show(fragment3).commit();
+                        active = fragment3;
+                        return true;
 
                     case R.id.nav_setting:
-                        fragment = new SettingFragment();
-                        break;
+                        fm.beginTransaction().hide(active).show(fragment4).commit();
+                        active = fragment4;
+                        return true;
                 }
 
-                return loadFragment(fragment);
+                return false;
             }
         });
 
@@ -72,6 +85,13 @@ public class HomeActivity extends BaseActivity {
                     .commit();
         }
         return false;
+    }
+
+    public void loadAllFragment(){
+        fm.beginTransaction().add(R.id.fragment_container, fragment4, "3").hide(fragment4).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
     }
 
 }

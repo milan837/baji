@@ -4,6 +4,8 @@ import com.example.baji.HomeActivity.ActiveBajiListFragment.Model.ActiveBajiList
 import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWithMatchListResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.BajiOnboardResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
+import com.example.baji.HomeActivity.ProfileFragment.OnboardBaji.Model.ProfileOnboardingBajiListResponsePojo;
+import com.example.baji.HomeActivity.ProfileFragment.OpenBaji.Model.ProfileOpenBajiListResponsePojo;
 import com.example.baji.OnBoardingActivity.OtpFragment.Model.UserRegisterPojo;
 import com.example.baji.OnBoardingActivity.SaveInfoFragment.Model.SaveUserInfoPojo;
 import com.google.gson.JsonObject;
@@ -34,4 +36,10 @@ public interface ApiCalls {
 
     @POST("active/onboardbaji/list")
     Call<ActiveBajiListResponsePojo> getAllActiveBajiList(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
+
+    @POST("openBaji/list/user")
+    Call<ProfileOpenBajiListResponsePojo> getProfileOpenBajiList(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
+
+    @POST("onboard/baji/list/user")
+    Call<ProfileOnboardingBajiListResponsePojo> getProfileOnboardBajiList(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
 }

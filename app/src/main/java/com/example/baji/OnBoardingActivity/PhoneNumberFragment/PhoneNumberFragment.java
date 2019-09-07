@@ -166,6 +166,7 @@ public class PhoneNumberFragment extends BaseFragment implements PhoneNumberFrag
             editor.putString("userId", String.valueOf(userRegisterPojo.getUser().getId()));
             editor.putString("imageUrl",userRegisterPojo.getUser().getImageUrl());
             editor.putString("username",userRegisterPojo.getUser().getUsername());
+            editor.putString("amount", String.valueOf(userRegisterPojo.getUser().getAmount()));
             editor.apply();
             editor.commit();
 

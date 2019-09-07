@@ -1,11 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/background_cutter_layout">
+
+    </RelativeLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="profile" />
-</LinearLayout>
+        app:elevation="0dp"
+        android:background="@android:color/transparent"
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/collapsing_tool_bar_layout"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:paddingTop="20dp"
+                android:id="@+id/container_layout"
+                app:layout_collapseMode="parallax"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- tool bar -->
+                <RelativeLayout
+                    android:id="@+id/top_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingRight="16dp"
+                    android:paddingLeft="16dp">
+
+                    <RelativeLayout
+                        android:layout_centerVertical="true"
+                        android:layout_width="5dp"
+                        android:layout_height="30dp"
+                        android:background="#FFF"
+                        android:id="@+id/bar"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/game_title_name"
+                        android:textSize="18dp"
+                        android:layout_marginLeft="16dp"
+                        android:text="Profile"
+                        android:textColor="#FFF"
+                        android:fontFamily="@font/semibold"/>
+
+
+                    <!-- notication button-->
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/notification_icon"
+                        android:layout_alignParentRight="true">
+
+                        <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@raw/notification"/>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <!-- middel vertical layout -->
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/profile_pic"
+                        android:src="@raw/profile_pic"/>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/profile_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/username"
+                            android:textSize="14dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="Milan Shrestha"
+                            android:textColor="#FFF"
+                            android:fontFamily="@font/bold"/>
+
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/amount"
+                            android:textSize="14dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="Rs 20,000"
+                            android:textColor="#FFF"
+                            android:fontFamily="@font/bold"/>
+
+                        <Button
+                            android:layout_marginTop="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
+                            android:elevation="3dp"
+                            android:layout_width="120dp"
+                            android:layout_height="35dp"
+                            android:id="@+id/with_draw_button"
+                            android:text="WithDraw"
+                            android:textAllCaps="false"
+                            android:textSize="12dp"
+                            android:fontFamily="@font/semibold"
+                            android:layout_marginBottom="10dp"
+                            android:textColor="#FFF"
+                            android:background="@drawable/with_draw_button_bg"
+                            />
+
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!-- match details Layout -->
+                <androidx.cardview.widget.CardView
+                    app:layout_collapseMode="parallax"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="#000"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp">
+
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/bar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14dp"
+                                android:text="Total Baji"
+                                android:textColor="@color/gray"
+                                android:fontFamily="@font/medium"/>
+
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/bar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/total_baji"
+                                android:textSize="18dp"
+                                android:text="230"
+                                android:textColor="@color/gray"
+                                android:fontFamily="@font/bold"/>
+
+                        </LinearLayout>
+
+                        <!-- win baji layout -->
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/bar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14dp"
+                                android:text="Win Baji"
+                                android:textColor="@color/gray"
+                                android:fontFamily="@font/medium"/>
+
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/bar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/total_win_baji"
+                                android:textSize="18dp"
+                                android:text="230"
+                                android:textColor="@color/gray"
+                                android:fontFamily="@font/bold"/>
+
+                        </LinearLayout>
+
+                        <!-- loose baji layout -->
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/bar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14dp"
+                                android:text="Lose Baji"
+                                android:textColor="@color/gray"
+                                android:fontFamily="@font/medium"/>
+
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/bar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/total_lose_baji"
+                                android:textSize="18dp"
+                                android:text="230"
+                                android:textColor="@color/gray"
+                                android:fontFamily="@font/bold"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:paddingTop="14dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- tab layout and view pager -->
+        <com.google.android.material.tabs.TabLayout
+            android:layout_below="@+id/container_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/tablayout"
+            app:tabSelectedTextColor="#000"
+            app:tabTextColor="@color/gray"
+            android:layout_gravity="bottom"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabIndicatorColor="#000"
+            app:tabPaddingStart="10dp"
+            app:tabPaddingEnd="10dp"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

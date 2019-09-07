@@ -140,6 +140,7 @@ public class SaveInfoFragment extends BaseFragment implements SaveInfoFragmentCo
         editor.putString("userId", String.valueOf(saveUserInfoPojo.getUserDetails().getId()));
         editor.putString("imageUrl",saveUserInfoPojo.getUserDetails().getImageUrl());
         editor.putString("username",saveUserInfoPojo.getUserDetails().getUsername());
+        editor.putString("amount", String.valueOf(saveUserInfoPojo.getUserDetails().getAmount()));
         editor.apply();
         editor.commit();
 

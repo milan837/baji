@@ -88,9 +88,9 @@ public class AcceptBajiBottomFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
 
-                if(openBajiId != 0){
+                if(openBajiId == 0){
                     Toast.makeText(getActivity(),"baji id is empty",Toast.LENGTH_LONG).show();
-                }else if(bajiOfferByAmount != 0){
+                }else if(bajiOfferByAmount == 0){
                     Toast.makeText(getActivity(),"amount is empty",Toast.LENGTH_LONG).show();
                 }else{
                     Bundle bundle=new Bundle();
