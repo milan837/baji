@@ -1,6 +1,7 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.BajiOnboardListFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.CreateNewBaij.CreateNewBajiBottomFragment;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.OpenBajiListFragment;
+import com.example.baji.NotificationActivity.NotificationActivity;
 import com.example.baji.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -72,6 +74,9 @@ public class MatchesProfileFragment extends BaseFragment {
 
     @BindView(R.id.back_button)
     RelativeLayout backButton;
+
+    @BindView(R.id.notification_icon)
+    RelativeLayout ntfIcon;
 
 
     MatchesProfileViewPagerAdapter matchesProfileViewPagerAdapter;
@@ -147,6 +152,14 @@ public class MatchesProfileFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 getFragmentManager().popBackStackImmediate();
+            }
+        });
+
+        ntfIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
             }
         });
 

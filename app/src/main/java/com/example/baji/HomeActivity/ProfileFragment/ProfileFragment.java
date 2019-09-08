@@ -1,12 +1,14 @@
 package com.example.baji.HomeActivity.ProfileFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.baji.BaseClasses.BaseFragment;
 import com.example.baji.HomeActivity.ProfileFragment.OnboardBaji.OnboardingBajiListFragment;
 import com.example.baji.HomeActivity.ProfileFragment.OpenBaji.OpenBajiListFragment;
+import com.example.baji.NotificationActivity.NotificationActivity;
 import com.example.baji.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -54,6 +57,9 @@ public class ProfileFragment extends BaseFragment {
 
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+
+    @BindView(R.id.notification_icon)
+    RelativeLayout backIcon;
 
     ProfileViewPagerAdapter adapter;
     List<String> pageTitle=new ArrayList<>();
@@ -112,6 +118,14 @@ public class ProfileFragment extends BaseFragment {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         adapter.notifyDataSetChanged();
+
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

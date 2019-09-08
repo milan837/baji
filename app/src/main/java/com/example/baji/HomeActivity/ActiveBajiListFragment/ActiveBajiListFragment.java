@@ -1,9 +1,11 @@
 package com.example.baji.HomeActivity.ActiveBajiListFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.baji.BaseClasses.BaseFragment;
 import com.example.baji.HomeActivity.ActiveBajiListFragment.Model.ActiveBajiListResponsePojo;
 import com.example.baji.HomeActivity.ActiveBajiListFragment.Model.OnboardBaji;
+import com.example.baji.NotificationActivity.NotificationActivity;
 import com.example.baji.R;
 import com.google.gson.JsonObject;
 
@@ -34,6 +37,9 @@ public class ActiveBajiListFragment extends BaseFragment implements ActiveBajiLi
 
     @BindView(R.id.total_baji_list)
     TextView totalBaji;
+
+    @BindView(R.id.notification_icon)
+    RelativeLayout ntfIcon;
 
     ActiveBajiListPresenter presenter;
     ActiveBajiListRecyclerViewAdapter adapter;
@@ -62,6 +68,14 @@ public class ActiveBajiListFragment extends BaseFragment implements ActiveBajiLi
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
+
+        ntfIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void callApi(int page){

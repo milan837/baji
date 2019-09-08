@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp">
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginTop="6dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/user_image"
+                android:src="@raw/profile_pic"/>
+
+            <LinearLayout
+                android:layout_toRightOf="@+id/user_image"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/username"
+                        android:textSize="14dp"
+                        android:text="Milan Shrestha"
+                        android:textColor="#000"
+                        android:fontFamily="@font/bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:id="@+id/ntf_desc"
+                        android:text="offers you an open baji"
+                        android:textColor="@color/gray"
+                        android:fontFamily="@font/medium"/>
+
+
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/type_ntf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:text="Liver pool Vs Barcelona"
+                        android:textColor="@color/appColor1"
+                        android:fontFamily="@font/semibold"/>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

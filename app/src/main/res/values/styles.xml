@@ -22,30 +22,28 @@
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/semibold</item>
     </style>
 
-<!--    &lt;!&ndash; set the rounded drawable as background to your bottom sheet &ndash;&gt;-->
-<!--    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">-->
-<!--        <item name="android:background">@drawable/bottom_sheet_white_bg</item>-->
-<!--    </style>-->
+    <!--    &lt;!&ndash; set the rounded drawable as background to your bottom sheet &ndash;&gt;-->
+    <!--    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">-->
+    <!--        <item name="android:background">@drawable/bottom_sheet_white_bg</item>-->
+    <!--    </style>-->
 
-<!--    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">-->
-<!--        <item name="android:windowIsFloating">false</item>-->
-<!--        <item name="bottomSheetStyle">@style/BottomSheet</item>-->
-<!--        <item name="android:windowTranslucentStatus" tools:ignore="NewApi">false</item>-->
-<!--    </style>-->
+    <!--    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">-->
+    <!--        <item name="android:windowIsFloating">false</item>-->
+    <!--        <item name="bottomSheetStyle">@style/BottomSheet</item>-->
+    <!--        <item name="android:windowTranslucentStatus" tools:ignore="NewApi">false</item>-->
+    <!--    </style>-->
 
-<!--    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" >-->
-<!--    </style>-->
+    <!--    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" >-->
+    <!--    </style>-->
 
-<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-<!--    </style>-->
+    <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <!--    </style>-->
 
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_white_bg</item>
     </style>
 
