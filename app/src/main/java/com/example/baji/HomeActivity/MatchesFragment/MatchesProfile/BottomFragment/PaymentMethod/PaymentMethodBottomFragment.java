@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
 import com.example.baji.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.gson.JsonObject;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -24,9 +26,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PaymentMethodBottomFragment extends BottomSheetDialogFragment implements PayMentMethodBottomContract.View {
+
+    @BindView(R.id.next_button)
+    RelativeLayout nextButton;
+
+    PayMentMethodBottomPresenter presenter;
+    String orderId="ORDER1",customerId="cust123";
 
     public static PaymentMethodBottomFragment getInstance(){
         return new PaymentMethodBottomFragment();
@@ -42,6 +51,7 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        presenter=new PayMentMethodBottomPresenter(getActivity(),this);
         initViews();
     }
 
@@ -49,6 +59,14 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
         }
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPaytmChecksumApi("100",orderId,customerId);
+            }
+        });
+
     }
 
     private void paytmGateWayIntegration(String checkSum,String orderId){
@@ -111,8 +129,18 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
 
     }
 
+    private void callPaytmChecksumApi(String amount,String orderId,String customerId){
+
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("amount",amount);
+        jsonObject.addProperty("orderId",orderId);
+        jsonObject.addProperty("customerId",customerId);
+        presenter.sendDataToApi(jsonObject);
+    }
+
     @Override
     public void displayResponse(PaytmChecksumResponsePojo paytmChecksumResponsePojo) {
-
+        Toast.makeText(getActivity(),paytmChecksumResponsePojo.getCHECKSUMHASH(),Toast.LENGTH_LONG).show();
+        paytmGateWayIntegration(paytmChecksumResponsePojo.getCHECKSUMHASH(),orderId);
     }
 }

@@ -3,6 +3,7 @@ package com.example.baji.Retrofit;
 import com.example.baji.HomeActivity.ActiveBajiListFragment.Model.ActiveBajiListResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.GameWithMatchListResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.BajiOnboardResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
 import com.example.baji.HomeActivity.ProfileFragment.OnboardBaji.Model.ProfileOnboardingBajiListResponsePojo;
 import com.example.baji.HomeActivity.ProfileFragment.OpenBaji.Model.ProfileOpenBajiListResponsePojo;
@@ -15,6 +16,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiCalls {
 
@@ -42,4 +44,15 @@ public interface ApiCalls {
 
     @POST("onboard/baji/list/user")
     Call<ProfileOnboardingBajiListResponsePojo> getProfileOnboardBajiList(@Header ("Authorization") String authKey,@Body JsonObject jsonObject);
+
+    @GET("paytm_check_sum/generateChecksum.php?")
+    Call<PaytmChecksumResponsePojo> getPaytmCheckSumApi(@Query("MID") String mId,
+                                                        @Query("CUST_ID") String custmerId,
+                                                        @Query("ORDER_ID") String orderId,
+                                                        @Query("INDUSTRY_TYPE_ID") String indurstryId,
+                                                        @Query("CHANNEL_ID") String channelId,
+                                                        @Query("TXN_AMOUNT") String amount,
+                                                        @Query("WEBSITE") String website,
+                                                        @Query("CALLBACK_URL") String callbackUrl
+                                                        );
 }

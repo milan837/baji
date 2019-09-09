@@ -16,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiInstance {
     private static final String BASE_URL="https://baji-karo.herokuapp.com/";
+    private static final String PHP_API_BASE_URL="https://iandfood.000webhostapp.com/";
 
     public static ApiCalls getInstance(){
         Gson gson=new GsonBuilder().setLenient().create();
@@ -30,6 +31,23 @@ public class ApiInstance {
                 .create(ApiCalls.class);
         return retrofitInstance;
     }
+
+    public static ApiCalls getPhpApiInstance(){
+        Gson gson=new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new LoggingInterceptor())
+                .build();
+        ApiCalls retrofitInstance=new Retrofit.Builder()
+                .baseUrl(PHP_API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .build()
+                .create(ApiCalls.class);
+        return retrofitInstance;
+    }
+
+
+
 }
 
 //logger class for ok http to debugge request and response
