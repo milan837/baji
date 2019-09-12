@@ -1,8 +1,12 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +18,17 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.AcceptBajiResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
 import com.example.baji.R;
+import com.example.baji.Utils.Constant;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.gson.JsonObject;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
+import com.paytm.pgsdk.easypay.actions.CustomProgressDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +43,11 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
     RelativeLayout nextButton;
 
     PayMentMethodBottomPresenter presenter;
-    String orderId="ORDER1",customerId="cust123";
+    String orderId="12335451",customerId="cust123";
+
+    String amount,openBajiId,matchId,type,teamId,userId="132";
+
+    ProgressDialog progressDialog;
 
     public static PaymentMethodBottomFragment getInstance(){
         return new PaymentMethodBottomFragment();
@@ -51,6 +63,28 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+       // userId=sharedPreferences.getString("userId",null);
+
+        amount=getArguments().getString("amount");
+        type=getArguments().getString("type");
+        matchId=getArguments().getString("matchId");
+
+        Toast.makeText(getActivity(),amount,Toast.LENGTH_LONG).show();
+        //for acception open baji
+        if(type.equals("accept")){
+            openBajiId=getArguments().getString("openBajiId");
+        }
+
+        //for creation new baji
+        if(type.equals("create")){
+            teamId=getArguments().getString("teamId");
+        }
+
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setProgress(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Processing...");
+        progressDialog.setCancelable(false);
         presenter=new PayMentMethodBottomPresenter(getActivity(),this);
         initViews();
     }
@@ -63,35 +97,31 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callPaytmChecksumApi("100",orderId,customerId);
+                callPaytmChecksumApi(amount,orderId,customerId);
             }
         });
 
     }
 
-    private void paytmGateWayIntegration(String checkSum,String orderId){
+    private void paytmGateWayIntegration(String checkSum){
         PaytmPGService Service = PaytmPGService.getStagingService();
         HashMap<String, String> paramMap = new HashMap<String,String>();
-        paramMap.put( "MID" , "mIWrXK50956351186023");
 
-        // Key in your staging and production MID available in your dashboard
+        paramMap.put( "MID" , Constant.PAYTM_MERCHENT_ID);
+        paramMap.put( "CUST_ID" , customerId);
         paramMap.put( "ORDER_ID" , orderId);
-        paramMap.put( "CUST_ID" , "cust123");
-        paramMap.put( "MOBILE_NO" , "8050078113");
-        paramMap.put( "EMAIL" , "milanshrestha837@gmail.com");
-        paramMap.put( "CHANNEL_ID" , "WAP");
-        paramMap.put( "TXN_AMOUNT" , "100.12");
-        paramMap.put( "WEBSITE" , "WEBSTAGING");
+        paramMap.put( "INDUSTRY_TYPE_ID" , Constant.PAYTM_INDUSTRY_ID);
+        paramMap.put( "CHANNEL_ID" , Constant.PAYTM_CHANNEL_ID);
+        paramMap.put( "TXN_AMOUNT" , amount);
+        paramMap.put( "WEBSITE" , Constant.PAYTM_WEBSITE);
+        paramMap.put( "CALLBACK_URL", Constant.PAYTM_CALLBACK_URL);
 
-        // This is the staging value. Production value is available in your dashboard
-        paramMap.put( "INDUSTRY_TYPE_ID" , "Retail");
-
-        // This is the staging value. Production value is available in your dashboard
-        paramMap.put( "CALLBACK_URL", "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp");
         paramMap.put( "CHECKSUMHASH" , checkSum);
+
         PaytmOrder Order = new PaytmOrder(paramMap);
 
         Service.initialize(Order, null);
+
         Service.startPaymentTransaction(getActivity(), true, true, new PaytmPaymentTransactionCallback() {
             /*Call Backs*/
             public void someUIErrorOccurred(String inErrorMessage) {
@@ -99,7 +129,16 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
                 Toast.makeText(getActivity(),"ui error",Toast.LENGTH_LONG).show();
             }
             public void onTransactionResponse(Bundle inResponse) {
-                Toast.makeText(getActivity(),"response",Toast.LENGTH_LONG).show();
+
+                Log.i("milan_log_payment",inResponse.toString());
+
+                // making call to api after payment is completed sucessfull
+                if(type.equals("accept")){
+                    callAcceptBajiApi();
+                }else if(type.equals("create")){
+                    callCreateNewBajiApi();
+                }
+
             }
             public void networkNotAvailable() {
 
@@ -107,40 +146,66 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
             }
             public void clientAuthenticationFailed(String inErrorMessage) {
 
-                Toast.makeText(getActivity(),"clien auth faield",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Authentication Faield",Toast.LENGTH_LONG).show();
             }
             public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl) {
 
-                Toast.makeText(getActivity(),"error loafing",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"error loading",Toast.LENGTH_LONG).show();
             }
             public void onBackPressedCancelTransaction() {
 
-                Toast.makeText(getActivity(),"back prese",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"back press",Toast.LENGTH_LONG).show();
             }
             public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
-
                 Toast.makeText(getActivity(),"cancle",Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    private void verfiyChecksum(String checksum){
-
-    }
 
     private void callPaytmChecksumApi(String amount,String orderId,String customerId){
+        progressDialog.show();
+        presenter.sendDataToApi(amount,orderId,customerId);
+    }
 
+    private void callCreateNewBajiApi(){
+        progressDialog.show();
         JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("userId",userId);
+        jsonObject.addProperty("matchesId",matchId);
+        jsonObject.addProperty("teamId",teamId);
         jsonObject.addProperty("amount",amount);
-        jsonObject.addProperty("orderId",orderId);
-        jsonObject.addProperty("customerId",customerId);
-        presenter.sendDataToApi(jsonObject);
+        presenter.sendDataToCreateBajiApi(jsonObject);
+    }
+
+    private void callAcceptBajiApi(){
+        progressDialog.show();
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("openBajiId",openBajiId);
+        jsonObject.addProperty("matchesId",matchId);
+        jsonObject.addProperty("userId",userId);
+        presenter.sendDataToAcceptBajiApi(jsonObject);
     }
 
     @Override
     public void displayResponse(PaytmChecksumResponsePojo paytmChecksumResponsePojo) {
-        Toast.makeText(getActivity(),paytmChecksumResponsePojo.getCHECKSUMHASH(),Toast.LENGTH_LONG).show();
-        paytmGateWayIntegration(paytmChecksumResponsePojo.getCHECKSUMHASH(),orderId);
+        progressDialog.hide();
+        paytmGateWayIntegration(paytmChecksumResponsePojo.getCHECKSUMHASH().trim());
     }
+
+    @Override
+    public void displayResponseFromAcceptBajiApi(AcceptBajiResponsePojo acceptBajiResponsePojo) {
+        progressDialog.hide();
+        progressDialog.dismiss();
+        Toast.makeText(getActivity(),acceptBajiResponsePojo.getMessage(),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void displayResponseFromCreateBajiApi(CreateNewBajiResponsePojo createNewBajiResponsePojo) {
+        progressDialog.hide();
+        progressDialog.dismiss();
+        Toast.makeText(getActivity(),createNewBajiResponsePojo.getMessage(),Toast.LENGTH_LONG).show();
+    }
+
 }

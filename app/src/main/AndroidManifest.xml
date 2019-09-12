@@ -33,6 +33,11 @@
             android:label="@string/title_activity_onboarding"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity" />
+
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+        android:configChanges="keyboardHidden|orientation|keyboard" />
+
     </application>
 
 </manifest>

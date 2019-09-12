@@ -1,14 +1,28 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod;
 
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.AcceptBajiResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
 import com.google.gson.JsonObject;
 
 public class PayMentMethodBottomContract {
     interface View{
         void displayResponse(PaytmChecksumResponsePojo paytmChecksumResponsePojo);
+        void displayResponseFromAcceptBajiApi(AcceptBajiResponsePojo acceptBajiResponsePojo);
+        void displayResponseFromCreateBajiApi(CreateNewBajiResponsePojo createNewBajiResponsePojo);
     }
     interface Presenter{
-        void sendDataToApi(JsonObject jsonObject);
+        //paytm checksum api call
+        void sendDataToApi(String amount,String orderId,String customerId);
         void getDataFromApi(PaytmChecksumResponsePojo paytmChecksumResponsePojo);
+
+        //accept open baji api
+        void sendDataToAcceptBajiApi(JsonObject jsonObject);
+        void getDataFromAcceptBajiApi(AcceptBajiResponsePojo acceptBajiResponsePojo);
+
+        //accept open baji api
+        void sendDataToCreateBajiApi(JsonObject jsonObject);
+        void getDataFromCreateBajiApi(CreateNewBajiResponsePojo createNewBajiResponsePojo);
+
     }
 }

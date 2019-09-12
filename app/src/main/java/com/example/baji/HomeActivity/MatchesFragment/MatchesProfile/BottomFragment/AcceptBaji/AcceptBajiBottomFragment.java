@@ -95,10 +95,14 @@ public class AcceptBajiBottomFragment extends BottomSheetDialogFragment {
                 }else{
                     Bundle bundle=new Bundle();
                     bundle.putString("amount", String.valueOf(bajiOfferByAmount));
-                    bundle.putString("oprnBajiId", String.valueOf(openBajiId));
+                    bundle.putString("openBajiId", String.valueOf(openBajiId));
                     bundle.putString("matchId", String.valueOf(match.getId()));
+                    bundle.putString("type","accept");
+
+                    Toast.makeText(getActivity(),String.valueOf(bajiOfferByAmount),Toast.LENGTH_LONG).show();
 
                     PaymentMethodBottomFragment paymentMethodBottomFragment=PaymentMethodBottomFragment.getInstance();
+                    paymentMethodBottomFragment.setArguments(bundle);
                     paymentMethodBottomFragment.show(getChildFragmentManager(),"paymentBottomFragment");
                 }
 
