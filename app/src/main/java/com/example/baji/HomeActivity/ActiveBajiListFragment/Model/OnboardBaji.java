@@ -10,7 +10,7 @@ public class OnboardBaji {
     private String timeStamp;
     @SerializedName("amount")
     @Expose
-    private Double amount;
+    private Integer amount;
     @SerializedName("teamTwo")
     @Expose
     private TeamTwo teamTwo;
@@ -41,11 +41,11 @@ public class OnboardBaji {
         this.timeStamp = timeStamp;
     }
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

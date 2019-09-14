@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.OnboardBaji;
 import com.example.baji.R;
+import com.example.baji.Utils.Utils;
 
 import java.util.List;
 
@@ -46,8 +47,8 @@ public class BajiOnboardRecyclerViewAdapter extends RecyclerView.Adapter<BajiOnb
         Glide.with(context).load(baji.getTeamTwo().getUserImageUrl()).into(holder.teamTwoUserImage);
         holder.teamOneUsername.setText(baji.getTeamTwo().getUsername());
 
-        holder.amount.setText(String.valueOf(baji.getAmount()));
-        holder.bajiTime.setText(baji.getTimeStamp());
+        holder.amount.setText("₹ "+String.valueOf(baji.getAmount()));
+        holder.bajiTime.setText(Utils.getDateFromTimeStamp(baji.getTimeStamp()));
 
     }
 

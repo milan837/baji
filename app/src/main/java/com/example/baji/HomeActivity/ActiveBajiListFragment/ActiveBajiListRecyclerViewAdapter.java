@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.baji.HomeActivity.ActiveBajiListFragment.Model.OnboardBaji;
 import com.example.baji.R;
+import com.example.baji.Utils.Utils;
 
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class ActiveBajiListRecyclerViewAdapter extends RecyclerView.Adapter<Acti
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         OnboardBaji baji=list.get(position);
 
-        holder.amount.setText(String.valueOf(baji.getAmount()));
+        holder.amount.setText("₹ "+String.valueOf(baji.getAmount()));
         holder.gameTitle.setText(baji.getGameTitle());
-        holder.matchesDate.setText(baji.getTimeStamp());
+        holder.matchesDate.setText(Utils.getDateFromTimeStamp(baji.getTimeStamp()));
 
         holder.teamOneName.setText(baji.getTeamOne().getTeamName());
         holder.teamOneUsername.setText(baji.getTeamOne().getUsername());

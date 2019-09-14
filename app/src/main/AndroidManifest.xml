@@ -3,9 +3,9 @@
     package="com.example.baji">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".WebViewActivity.WebViewActivity"
+            android:label="@string/title_activity_web_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".NotificationActivity.NotificationActivity"
             android:label="@string/title_activity_notification"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeActivity.HomeActivity"
             android:label="@string/title_activity_home"
@@ -31,13 +35,11 @@
         <activity
             android:name=".OnBoardingActivity.OnboardingActivity"
             android:label="@string/title_activity_onboarding"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity" />
-
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
-        android:configChanges="keyboardHidden|orientation|keyboard" />
-
+            android:configChanges="keyboardHidden|orientation|keyboard" />
     </application>
 
 </manifest>

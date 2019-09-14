@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.R;
+import com.example.baji.Utils.Utils;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class MatchListRecyclerViewAdapter extends RecyclerView.Adapter<MatchList
 
         Glide.with(context).load(match.getTeamOne().getImageUrl()).into(holder.teamOneImage);
         Glide.with(context).load(match.getTeamTwo().getImageUrl()).into(holder.teamTwoImage);
-        holder.matchesDate.setText(match.getTimeStamp());
+        holder.matchesDate.setText(Utils.getDateFromTimeStamp(match.getTimeStamp()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,7 @@ public class MatchListRecyclerViewAdapter extends RecyclerView.Adapter<MatchList
                 bundle.putString("gameTitle",gameTitle);
                 bundle.putString("totalMatches",String.valueOf(list.size()));
                 Navigation.findNavController(v).navigate(R.id.matchListFragment_to_matchProfileFragment,bundle);
+
             }
         });
 

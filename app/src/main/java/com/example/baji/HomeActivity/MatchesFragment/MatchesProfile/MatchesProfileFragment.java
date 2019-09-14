@@ -24,6 +24,7 @@ import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragme
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.OpenBajiListFragment;
 import com.example.baji.NotificationActivity.NotificationActivity;
 import com.example.baji.R;
+import com.example.baji.Utils.Utils;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -170,7 +171,7 @@ public class MatchesProfileFragment extends BaseFragment {
         totalMatchesTxt.setText(totalMatches+" Matches");
         teamOneNameTxt.setText(match.getTeamOne().getName());
         teamTwoNameTxt.setText(match.getTeamTwo().getName());
-        matchesDateTxt.setText(match.getTimeStamp());
+        matchesDateTxt.setText(Utils.getDateFromTimeStamp(match.getTimeStamp()));
         totalBajiTxt.setText("Total Baji: 20");
         Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamOneLogoImg);
         Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamTwoLogoImg);

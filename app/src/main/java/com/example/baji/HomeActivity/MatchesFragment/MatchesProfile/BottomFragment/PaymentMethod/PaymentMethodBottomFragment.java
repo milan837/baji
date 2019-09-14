@@ -67,10 +67,10 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
        // userId=sharedPreferences.getString("userId",null);
 
         amount=getArguments().getString("amount");
+        amount=amount+".00";
         type=getArguments().getString("type");
         matchId=getArguments().getString("matchId");
 
-        Toast.makeText(getActivity(),amount,Toast.LENGTH_LONG).show();
         //for acception open baji
         if(type.equals("accept")){
             openBajiId=getArguments().getString("openBajiId");
@@ -125,24 +125,34 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         Service.startPaymentTransaction(getActivity(), true, true, new PaytmPaymentTransactionCallback() {
             /*Call Backs*/
             public void someUIErrorOccurred(String inErrorMessage) {
-
                 Toast.makeText(getActivity(),"ui error",Toast.LENGTH_LONG).show();
             }
             public void onTransactionResponse(Bundle inResponse) {
 
-                Log.i("milan_log_payment",inResponse.toString());
+                String responseCode=inResponse.getString("RESPCODE");
+                String status=inResponse.getString("STATUS");
+                String responseMessage=inResponse.getString("RESPMSG");
+
+                Log.i("milan_log_payment",inResponse.toString()+"\n"+
+                        inResponse.getString("")+"\n"+
+                        inResponse.getString("STATUS")+"\n"+
+                        inResponse.getString("RESPMSG"));
 
                 // making call to api after payment is completed sucessfull
-                if(type.equals("accept")){
-                    callAcceptBajiApi();
-                }else if(type.equals("create")){
-                    callCreateNewBajiApi();
+                if(responseCode.equals("01")){
+                    if(type.equals("accept")){
+                        callAcceptBajiApi();
+                    }else if(type.equals("create")){
+                        callCreateNewBajiApi();
+                    }
+                }else{
+                    Toast.makeText(getActivity(),responseMessage,Toast.LENGTH_LONG).show();
                 }
+
 
             }
             public void networkNotAvailable() {
-
-                Toast.makeText(getActivity(),"network not available",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Network not available",Toast.LENGTH_LONG).show();
             }
             public void clientAuthenticationFailed(String inErrorMessage) {
 
@@ -150,14 +160,14 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
             }
             public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl) {
 
-                Toast.makeText(getActivity(),"error loading",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Error loading",Toast.LENGTH_LONG).show();
             }
             public void onBackPressedCancelTransaction() {
 
-                Toast.makeText(getActivity(),"back press",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Back press",Toast.LENGTH_LONG).show();
             }
             public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
-                Toast.makeText(getActivity(),"cancle",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Cancle",Toast.LENGTH_LONG).show();
             }
         });
 

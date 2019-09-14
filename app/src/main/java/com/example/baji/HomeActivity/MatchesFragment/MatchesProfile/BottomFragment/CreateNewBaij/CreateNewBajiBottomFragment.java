@@ -107,7 +107,7 @@ public class CreateNewBajiBottomFragment extends BottomSheetDialogFragment {
                 }else{
                     Bundle bundle=new Bundle();
                     bundle.putString("matchId",String.valueOf(match.getId()));
-                    bundle.putString("amount",selectedAmount+".00");
+                    bundle.putString("amount",selectedAmount);
                     bundle.putString("teamId", String.valueOf(selectedTeamId));
                     bundle.putString("type","create");
                     //create new baji further process

@@ -32,7 +32,7 @@ public class User {
     private String imageUrl;
     @SerializedName("amount")
     @Expose
-    private Double amount;
+    private Integer amount;
 
     public Integer getId() {
         return id;
@@ -98,11 +98,11 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

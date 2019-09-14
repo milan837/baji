@@ -43,7 +43,7 @@ public class OpenBajiListRecyclerViewAdapter extends RecyclerView.Adapter<OpenBa
         OpenBid bid=openBidsList.get(position);
 
         holder.username.setText(bid.getUser().getUsername());
-        holder.bajiAmount.setText(String.valueOf(bid.getAmount()));
+        holder.bajiAmount.setText("₹ "+String.valueOf(bid.getAmount()));
         holder.teamName.setText(bid.getTeam().getName());
 
         Glide.with(context).load(bid.getUser().getImageUrl()).into(holder.profilePic);

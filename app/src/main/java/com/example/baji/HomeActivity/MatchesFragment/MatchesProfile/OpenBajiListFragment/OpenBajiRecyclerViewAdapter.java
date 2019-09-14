@@ -30,11 +30,13 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
     Context context;
     List<OpenBid> openBidsList;
     Match match;
+    String userId;
 
-    public OpenBajiRecyclerViewAdapter(Context context, List<OpenBid> openBidsList,Match match) {
+    public OpenBajiRecyclerViewAdapter(Context context, List<OpenBid> openBidsList,Match match,String userId) {
         this.context = context;
         this.openBidsList=openBidsList;
         this.match=match;
+        this.userId=userId;
     }
 
 
@@ -49,8 +51,17 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
         OpenBid bid=openBidsList.get(position);
 
         holder.username.setText(bid.getUser().getUsername());
-        holder.bajiAmount.setText(String.valueOf(bid.getAmount()));
+        holder.bajiAmount.setText("₹ "+String.valueOf(bid.getAmount()));
         holder.teamName.setText(bid.getTeam().getName());
+
+//        if(userId.equals(String.valueOf(bid.getUser().getId()))){
+//            holder.acceptBajiButton.setVisibility(View.GONE);
+//            holder.username.setVisibility(View.GONE);
+//            holder.offerTxt.setText("You have offer an open baji");
+//        }else{
+//            holder.username.setVisibility(View.VISIBLE);
+//            holder.acceptBajiButton.setVisibility(View.VISIBLE);
+//        }
 
         Glide.with(context).load(bid.getUser().getImageUrl()).into(holder.profilePic);
         holder.acceptBajiButton.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +72,7 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
                 bundle.putInt("openBajiId",bid.getId());
                 bundle.putString("username",bid.getUser().getUsername());
                 bundle.putString("teamName",bid.getTeam().getName());
-                bundle.putDouble("amount",bid.getAmount());
+                bundle.putInt("amount",bid.getAmount());
 
                 AcceptBajiBottomFragment acceptBajiBottomFragment=AcceptBajiBottomFragment.getInstance();
                 acceptBajiBottomFragment.setArguments(bundle);
@@ -85,6 +96,9 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
 
         @BindView(R.id.team_name)
         TextView teamName;
+
+        @BindView(R.id.offer_txt)
+        TextView offerTxt;
 
         @BindView(R.id.baji_amount)
         TextView bajiAmount;

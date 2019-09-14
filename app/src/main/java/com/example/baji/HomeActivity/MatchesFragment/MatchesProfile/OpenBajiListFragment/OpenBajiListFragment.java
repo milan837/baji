@@ -33,6 +33,7 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     List<OpenBid> openBidList=new ArrayList<>();
     OpenBajiListFragmentPresenter presenter;
     Match match;
+    String userId="132";
 
     int matchesId=2,page=0;
 
@@ -56,7 +57,7 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     private void initViews(){
         callApi(matchesId,page);
 
-        adapter=new OpenBajiRecyclerViewAdapter(getActivity(),openBidList,match);
+        adapter=new OpenBajiRecyclerViewAdapter(getActivity(),openBidList,match,userId);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

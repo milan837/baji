@@ -11,7 +11,7 @@ public class OpenBid {
     private String timeStamp;
     @SerializedName("amount")
     @Expose
-    private Double amount;
+    private Integer amount;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -30,11 +30,11 @@ public class OpenBid {
         this.timeStamp = timeStamp;
     }
 
-    public Double getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

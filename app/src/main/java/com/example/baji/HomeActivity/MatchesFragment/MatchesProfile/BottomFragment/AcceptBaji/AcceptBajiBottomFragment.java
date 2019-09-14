@@ -66,7 +66,7 @@ public class AcceptBajiBottomFragment extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
         match=(Match)getArguments().getSerializable("match");
-        bajiOfferByAmount=getArguments().getDouble("amount");
+        bajiOfferByAmount=getArguments().getInt("amount");
         openBajiId=getArguments().getInt("openBajiId");
         bajiOfferByTeamName=getArguments().getString("teamName");
         bajiOfferByUsername=getArguments().getString("username");
