@@ -18,12 +18,12 @@ public class User {
     private int active;
     private String authKey;
     private String imageUrl;
-    private double amount;
+    private int amount;
 
     public User() {
     }
 
-    public User(String username, String phoneNumber, String email, String otp, int active, String authKey, String imageUrl, double amount) {
+    public User(String username, String phoneNumber, String email, String otp, int active, String authKey, String imageUrl, int amount) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -98,11 +98,11 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

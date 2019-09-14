@@ -49,7 +49,7 @@ public class OpenBidsController {
                     if(!amount.isEmpty() && !matchesId.isEmpty() && !teamId.isEmpty() && !userId.isEmpty()){
                         OpenBids openBids=new OpenBids();
                         openBids.setActive(0);
-                        openBids.setAmount(Double.valueOf(amount));
+                        openBids.setAmount(Integer.valueOf(amount));
                         openBids.setTeam(teamRespository.findById(Integer.valueOf(teamId)).get());
                         openBids.setMatches(matchesRepository.findById(Integer.valueOf(matchesId)).get());
                         Date date=new Date();

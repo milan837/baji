@@ -14,13 +14,13 @@ public class OpenBids {
     @ManyToOne
     private User user;
     private String timeStamp;
-    private double amount;
+    private int amount;
     private int active;
 
     public OpenBids() {
     }
 
-    public OpenBids(Matches matches, Team team, User user, String timeStamp, double amount,int active) {
+    public OpenBids(Matches matches, Team team, User user, String timeStamp, int amount,int active) {
         this.matches = matches;
         this.team = team;
         this.user = user;
@@ -77,11 +77,11 @@ public class OpenBids {
         this.timeStamp = timeStamp;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }
