@@ -1,5 +1,7 @@
 package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +35,8 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     List<OpenBid> openBidList=new ArrayList<>();
     OpenBajiListFragmentPresenter presenter;
     Match match;
-    String userId="132";
-
-    int matchesId=2,page=0;
+    String userId;
+    int matchesId,page=0;
 
     @Nullable
     @Override
@@ -46,6 +47,10 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListFr
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        userId=sharedPreferences.getString("userId",null);
+
         matchesId=getArguments().getInt("matchesId");
         match=(Match)getArguments().getSerializable("match");
 

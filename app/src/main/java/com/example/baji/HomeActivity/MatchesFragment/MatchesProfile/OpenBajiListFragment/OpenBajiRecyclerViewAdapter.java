@@ -54,14 +54,14 @@ public class OpenBajiRecyclerViewAdapter extends RecyclerView.Adapter<OpenBajiRe
         holder.bajiAmount.setText("₹ "+String.valueOf(bid.getAmount()));
         holder.teamName.setText(bid.getTeam().getName());
 
-//        if(userId.equals(String.valueOf(bid.getUser().getId()))){
-//            holder.acceptBajiButton.setVisibility(View.GONE);
-//            holder.username.setVisibility(View.GONE);
-//            holder.offerTxt.setText("You have offer an open baji");
-//        }else{
-//            holder.username.setVisibility(View.VISIBLE);
-//            holder.acceptBajiButton.setVisibility(View.VISIBLE);
-//        }
+        if(userId.equals(String.valueOf(bid.getUser().getId()))){
+            holder.acceptBajiButton.setVisibility(View.GONE);
+            holder.username.setVisibility(View.GONE);
+            holder.offerTxt.setText("You have offer an open baji");
+        }else{
+            holder.username.setVisibility(View.VISIBLE);
+            holder.acceptBajiButton.setVisibility(View.VISIBLE);
+        }
 
         Glide.with(context).load(bid.getUser().getImageUrl()).into(holder.profilePic);
         holder.acceptBajiButton.setOnClickListener(new View.OnClickListener() {

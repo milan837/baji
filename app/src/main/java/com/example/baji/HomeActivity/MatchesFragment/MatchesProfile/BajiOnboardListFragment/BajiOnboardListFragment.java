@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baji.BaseClasses.BaseFragment;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.BajiOnboardResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardListFragment.Model.OnboardBaji;
 import com.example.baji.R;
@@ -31,7 +32,8 @@ public class BajiOnboardListFragment extends BaseFragment implements BajiOnboard
     List<OnboardBaji> onboardBajiList=new ArrayList<>();
     BajiOnboardListFragmentPresenter presenter;
 
-    int matchesId=2,page=0;
+    Match match;
+    int matchesId,page=0;
 
     @Nullable
     @Override
@@ -42,6 +44,9 @@ public class BajiOnboardListFragment extends BaseFragment implements BajiOnboard
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        matchesId=getArguments().getInt("matchesId");
+        match=(Match)getArguments().getSerializable("match");
+
         ButterKnife.bind(this,view);
         presenter=new BajiOnboardListFragmentPresenter(getActivity(),this);
         initViews();

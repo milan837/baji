@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,24 +32,29 @@ public class MatchListFragment extends BaseFragment implements MatchesListFragme
     MatchesListFragmentPresenter presenter;
     List<Game> gameList=new ArrayList<>();
 
+    View rootView=null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home_match_list_layout,container,false);
+       if(rootView == null){
+           rootView =inflater.inflate(R.layout.fragment_home_match_list_layout,container,false);
+           presenter=new MatchesListFragmentPresenter(getActivity(),this);
+           presenter.sendDataToApi();
+           showProgress();
+       }else{
+           // when use press back from match profile
+       }
+       return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        presenter=new MatchesListFragmentPresenter(getActivity(),this);
         initViews();
     }
 
     private void initViews(){
-        presenter.sendDataToApi();
-        showProgress();
-
         adapter=new MatchesListWithGameTitleRecyclerViewAdapter(getActivity(),gameList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

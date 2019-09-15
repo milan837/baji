@@ -33,7 +33,7 @@ public class OpenBajiListFragment extends BaseFragment implements OpenBajiListCo
     List<OpenBid> list=new ArrayList<>();
 
     OpenBajiListPresenter presenter;
-    String userId="";
+    String userId;
     int page=0;
 
 

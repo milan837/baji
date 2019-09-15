@@ -23,6 +23,7 @@ import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragme
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
 import com.example.baji.R;
 import com.example.baji.Utils.Constant;
+import com.example.baji.Utils.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.gson.JsonObject;
 import com.paytm.pgsdk.PaytmOrder;
@@ -36,6 +37,7 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.internal.Util;
 
 public class PaymentMethodBottomFragment extends BottomSheetDialogFragment implements PayMentMethodBottomContract.View {
 
@@ -43,10 +45,9 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
     RelativeLayout nextButton;
 
     PayMentMethodBottomPresenter presenter;
-    String orderId="12335451",customerId="cust123";
 
-    String amount,openBajiId,matchId,type,teamId,userId="132";
-
+    String amount,openBajiId,paytmAmount,matchId,type,teamId,userId="132";
+    String orderId,customerId;
     ProgressDialog progressDialog;
 
     public static PaymentMethodBottomFragment getInstance(){
@@ -66,8 +67,12 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
        // userId=sharedPreferences.getString("userId",null);
 
+        orderId= Utils.getOrderId();
+        customerId="CUSTOMER"+userId;
+
         amount=getArguments().getString("amount");
-        amount=amount+".00";
+        paytmAmount=amount+".00";
+
         type=getArguments().getString("type");
         matchId=getArguments().getString("matchId");
 
@@ -97,7 +102,7 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callPaytmChecksumApi(amount,orderId,customerId);
+                callPaytmChecksumApi(paytmAmount,orderId,customerId);
             }
         });
 
@@ -112,7 +117,7 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         paramMap.put( "ORDER_ID" , orderId);
         paramMap.put( "INDUSTRY_TYPE_ID" , Constant.PAYTM_INDUSTRY_ID);
         paramMap.put( "CHANNEL_ID" , Constant.PAYTM_CHANNEL_ID);
-        paramMap.put( "TXN_AMOUNT" , amount);
+        paramMap.put( "TXN_AMOUNT" , paytmAmount);
         paramMap.put( "WEBSITE" , Constant.PAYTM_WEBSITE);
         paramMap.put( "CALLBACK_URL", Constant.PAYTM_CALLBACK_URL);
 

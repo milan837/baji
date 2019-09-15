@@ -3,19 +3,23 @@ package com.example.baji.HomeActivity.ProfileFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.baji.BaseClasses.BaseFragment;
 import com.example.baji.HomeActivity.ProfileFragment.OnboardBaji.OnboardingBajiListFragment;
 import com.example.baji.HomeActivity.ProfileFragment.OpenBaji.OpenBajiListFragment;
@@ -51,6 +55,8 @@ public class ProfileFragment extends BaseFragment {
     @BindView(R.id.total_lose_baji)
     TextView totalLoseBajiTxt;
 
+    @BindView(R.id.profile_pic)
+    ImageView profilePic;
 
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
@@ -65,7 +71,7 @@ public class ProfileFragment extends BaseFragment {
     List<String> pageTitle=new ArrayList<>();
     List<Fragment> fragmentList=new ArrayList<>();
 
-    String username,amount,userId="132",profilePic,totalBaji,totalWinBaji,totalLoseBaji;
+    String username,amount,userId,imageUrl,totalBaji,totalWinBaji,totalLoseBaji;
 
     @Nullable
     @Override
@@ -78,11 +84,11 @@ public class ProfileFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
 
-//        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-//        userId=sharedPreferences.getString("userId",null);
-//        amount=sharedPreferences.getString("amount",null);
-//        username=savedInstanceState.getString("username",null);
-//        profilePic=sharedPreferences.getString("imageUrl",null);
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        userId=sharedPreferences.getString("userId",null);
+        amount=sharedPreferences.getString("amount",null);
+        username=sharedPreferences.getString("username",null);
+        imageUrl=sharedPreferences.getString("imageUrl",null);
 //        totalBaji=sharedPreferences.getString("totalBaji",null);
 //        totalLoseBaji=sharedPreferences.getString("totalLoseBaji",null);
 //        totalWinBaji=sharedPreferences.getString("totalWinBaji",null);
@@ -97,6 +103,8 @@ public class ProfileFragment extends BaseFragment {
     }
 
     public void initViews(){
+
+        initUserData();
 
         pageTitle.add("Onboard baji");
         pageTitle.add("Pending Baji");
@@ -127,6 +135,20 @@ public class ProfileFragment extends BaseFragment {
             }
         });
 
+        withDrawBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"taking amount",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+    private void initUserData(){
+        amountTxt.setText("₹ "+amount);
+        usernameTxt.setText(username);
+        Glide.with(getActivity()).load(imageUrl).into(profilePic);
     }
 
 

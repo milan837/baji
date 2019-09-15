@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +15,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.baji.HomeActivity.HomeActivity;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesList.Model.Match;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.CreateNewBaij.CreateNewBajiBottomFragment;
 import com.example.baji.R;
 import com.example.baji.Utils.Utils;
 
@@ -62,6 +65,18 @@ public class MatchListRecyclerViewAdapter extends RecyclerView.Adapter<MatchList
             }
         });
 
+        holder.bajiNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle1=new Bundle();
+                bundle1.putSerializable("matches",match);
+                CreateNewBajiBottomFragment createNewBajiBottomFragment=CreateNewBajiBottomFragment.getInstance();
+                createNewBajiBottomFragment.setArguments(bundle1);
+                createNewBajiBottomFragment.show(((HomeActivity)context).getSupportFragmentManager(),"createNewBajiFragment");
+
+            }
+        });
+
     }
 
     @Override
@@ -89,7 +104,8 @@ public class MatchListRecyclerViewAdapter extends RecyclerView.Adapter<MatchList
         @BindView(R.id.team_two_image)
         ImageView teamTwoImage;
 
-
+        @BindView(R.id.baji_now_button)
+        Button bajiNowBtn;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

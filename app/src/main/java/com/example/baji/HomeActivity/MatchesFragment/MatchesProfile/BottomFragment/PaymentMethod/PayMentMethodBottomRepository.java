@@ -70,14 +70,14 @@ public class PayMentMethodBottomRepository {
                     presenter.getDataFromCreateBajiApi(response.body());
                 }else{
                     Toast.makeText(context,"",Toast.LENGTH_LONG).show();
-                    Log.i("milan_log",response.message()+" error code create new baji");
+                    Log.i("milan_log",response.code()+" error code create new baji");
                 }
             }
 
             @Override
             public void onFailure(Call<CreateNewBajiResponsePojo> call, Throwable t) {
                 Toast.makeText(context,"",Toast.LENGTH_LONG).show();
-                Log.i("milan_log",t.getMessage()+" error code create new baji");
+                Log.i("milan_log",t.getMessage()+" failure create new baji");
             }
         });
     }
@@ -92,14 +92,14 @@ public class PayMentMethodBottomRepository {
                     presenter.getDataFromAcceptBajiApi(response.body());
                 }else{
                     Toast.makeText(context,"",Toast.LENGTH_LONG).show();
-                    Log.i("milan_log",response.message()+" error code Accept Baji");
+                    Log.i("milan_log",response.code()+" error code Accept Baji");
                 }
             }
 
             @Override
             public void onFailure(Call<AcceptBajiResponsePojo> call, Throwable t) {
                 Toast.makeText(context,"",Toast.LENGTH_LONG).show();
-                Log.i("milan_log",t.getMessage()+" error code Accept Baji");
+                Log.i("milan_log",t.getMessage()+"  failure code Accept Baji");
             }
         });
     }

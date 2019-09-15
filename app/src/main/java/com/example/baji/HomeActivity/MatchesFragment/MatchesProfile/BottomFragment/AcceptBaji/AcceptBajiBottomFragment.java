@@ -45,7 +45,7 @@ public class AcceptBajiBottomFragment extends BottomSheetDialogFragment {
     Match match;
     String bajiOfferByUsername,bajiOfferByTeamName;
     int openBajiId=0;
-    double bajiOfferByAmount=0;
+    int bajiOfferByAmount=0;
 
     String selectedTeam;
     int selectedTeamId=0;
@@ -75,13 +75,14 @@ public class AcceptBajiBottomFragment extends BottomSheetDialogFragment {
     }
 
     private void initViews(){
-        offerAmountTxt.setText(String.valueOf(bajiOfferByAmount));
+
+        offerAmountTxt.setText("₹ "+String.valueOf(bajiOfferByAmount));
         offerTeamTxt.setText(bajiOfferByTeamName);
         offerUsernameTxt.setText("You are accepting the bhaji challenge of "+bajiOfferByUsername);
 
         seletedTeamProcess();
 
-        selectedAmountTxt.setText(String.valueOf(bajiOfferByAmount));
+        selectedAmountTxt.setText("₹ "+String.valueOf(bajiOfferByAmount));
         selectedTeamTxt.setText(selectedTeam);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
