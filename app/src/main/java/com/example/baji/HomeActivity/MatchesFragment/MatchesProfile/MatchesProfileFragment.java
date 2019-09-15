@@ -173,7 +173,7 @@ public class MatchesProfileFragment extends BaseFragment {
         teamTwoNameTxt.setText(match.getTeamTwo().getName());
         matchesDateTxt.setText(Utils.getDateFromTimeStamp(match.getTimeStamp()));
         totalBajiTxt.setText("Total Baji: 20");
-        Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamOneLogoImg);
+        Glide.with(getActivity()).load(match.getTeamOne().getImageUrl()).into(teamOneLogoImg);
         Glide.with(getActivity()).load(match.getTeamTwo().getImageUrl()).into(teamTwoLogoImg);
     }
 

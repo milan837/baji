@@ -111,6 +111,9 @@ public class CreateNewBajiBottomFragment extends BottomSheetDialogFragment {
                     bundle.putString("teamId", String.valueOf(selectedTeamId));
                     bundle.putString("type","create");
                     //create new baji further process
+                    Log.i("molan_log_a",match.getId()+"=>"+
+                            selectedAmount+"=>"+
+                            String.valueOf(selectedTeamId));
 
                     PaymentMethodBottomFragment paymentMethodBottomFragment=PaymentMethodBottomFragment.getInstance();
                     paymentMethodBottomFragment.setArguments(bundle);

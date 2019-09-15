@@ -46,7 +46,7 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
 
     PayMentMethodBottomPresenter presenter;
 
-    String amount,openBajiId,paytmAmount,matchId,type,teamId,userId="132";
+    String amount,openBajiId,paytmAmount,matchId,type,teamId,userId;
     String orderId,customerId;
     ProgressDialog progressDialog;
 
@@ -65,7 +65,7 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-       // userId=sharedPreferences.getString("userId",null);
+        userId=sharedPreferences.getString("userId",null);
 
         orderId= Utils.getOrderId();
         customerId="CUSTOMER"+userId;
@@ -191,6 +191,12 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         jsonObject.addProperty("matchesId",matchId);
         jsonObject.addProperty("teamId",teamId);
         jsonObject.addProperty("amount",amount);
+
+        Log.i("molan_log_sa",matchId+"=>"+
+                amount+"=>"+
+                String.valueOf(teamId)+"="+
+                userId);
+
         presenter.sendDataToCreateBajiApi(jsonObject);
     }
 
