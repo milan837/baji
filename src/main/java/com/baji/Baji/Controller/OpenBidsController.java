@@ -79,6 +79,7 @@ public class OpenBidsController {
     @PostMapping("/openBaji/list")
     public Map<String,Object> getOpenBajiPage(@RequestHeader("Authorization") String authKey,@RequestBody Map<String,Object> request){
         response=new HashMap<>();
+
         if(authKey != null && !authKey.isEmpty()) {
             if (userRepository.existsByAuthKey(authKey)) {
                 if(request.containsKey("matchesId") && request.containsKey("page")){
@@ -113,6 +114,12 @@ public class OpenBidsController {
                         response.put("message", "list of open bid of match id");
                         response.put("openBids", openBidsList);
 
+                    }else{
+                        response.put("size",0);
+                        response.put("page",0);
+                        response.put("status", "200");
+                        response.put("message", "match id do not exist ");
+                        response.put("openBids", new ArrayList<>());
                     }
                 }else{
                     response.put("status", "200");
@@ -166,6 +173,12 @@ public class OpenBidsController {
                         response.put("message", "list of open bid of match id");
                         response.put("openBids", openBidsList);
 
+                    }else{
+                        response.put("size",0);
+                        response.put("page",0);
+                        response.put("status", "200");
+                        response.put("message", "user id do not exist");
+                        response.put("openBids", new ArrayList<>());
                     }
                 }else{
                     response.put("status", "200");
