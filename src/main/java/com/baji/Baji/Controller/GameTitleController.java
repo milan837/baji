@@ -81,14 +81,13 @@ public class GameTitleController {
     @GetMapping("/game/match/list")
     public Map<String,Object> getGameWithMatchList(){
         response=new HashMap<>();
-        List<Map> matchesListMap=new ArrayList<>();
-        List<Map> gameListMap=new ArrayList<>();
 
+        List<Map> gameListMap=new ArrayList<>();
         repository.findAll().forEach(s->{
             Map<String,Object> games=new HashMap<>();
 
-            matchesRepository.findAllByGameTitleId(s.getId(), PageRequest.of(0, Constant.PAGE_SIZE, Sort.by("id").descending())).forEach(m->{
-
+            List<Map> matchesListMap=new ArrayList<>();
+            matchesRepository.findAllByGameTitleId(s.getId()).forEach(m->{
                 Map<String,Object> matches=new HashMap<>();
 
                 matches.put("id",m.getId());

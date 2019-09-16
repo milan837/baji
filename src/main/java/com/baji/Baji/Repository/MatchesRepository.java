@@ -13,4 +13,5 @@ public interface MatchesRepository extends CrudRepository<Matches,Integer> {
 
     Page<Matches> findAll(Pageable pageable);
     Page<Matches> findAllByGameTitleId(int gameTitleId,Pageable pageable);
+    List<Matches> findAllByGameTitleId(int gameTitleId);
 }
