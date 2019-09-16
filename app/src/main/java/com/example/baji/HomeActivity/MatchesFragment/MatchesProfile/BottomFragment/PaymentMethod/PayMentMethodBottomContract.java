@@ -3,6 +3,7 @@ package com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragm
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.AcceptBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.TransactionResponsePojo;
 import com.google.gson.JsonObject;
 
 public class PayMentMethodBottomContract {
@@ -10,6 +11,7 @@ public class PayMentMethodBottomContract {
         void displayResponse(PaytmChecksumResponsePojo paytmChecksumResponsePojo);
         void displayResponseFromAcceptBajiApi(AcceptBajiResponsePojo acceptBajiResponsePojo);
         void displayResponseFromCreateBajiApi(CreateNewBajiResponsePojo createNewBajiResponsePojo);
+        void displayResponseFromTransactionApi(TransactionResponsePojo transactionResponsePojo);
     }
     interface Presenter{
         //paytm checksum api call
@@ -24,5 +26,8 @@ public class PayMentMethodBottomContract {
         void sendDataToCreateBajiApi(JsonObject jsonObject);
         void getDataFromCreateBajiApi(CreateNewBajiResponsePojo createNewBajiResponsePojo);
 
+        //inserting transaction details
+        void sendDataToTransactionApi(JsonObject jsonObject);
+        void getDataFromTransactionApi(TransactionResponsePojo transactionResponsePojo);
     }
 }

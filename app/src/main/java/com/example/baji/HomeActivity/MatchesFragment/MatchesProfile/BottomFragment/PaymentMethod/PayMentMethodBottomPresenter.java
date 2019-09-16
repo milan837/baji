@@ -5,9 +5,11 @@ import android.content.Context;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.AcceptBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.TransactionResponsePojo;
 import com.google.gson.JsonObject;
 
 public class PayMentMethodBottomPresenter implements PayMentMethodBottomContract.Presenter {
+
     Context context;
     PayMentMethodBottomContract.View view;
     PayMentMethodBottomRepository repository;
@@ -46,5 +48,15 @@ public class PayMentMethodBottomPresenter implements PayMentMethodBottomContract
     @Override
     public void getDataFromCreateBajiApi(CreateNewBajiResponsePojo createNewBajiResponsePojo) {
         view.displayResponseFromCreateBajiApi(createNewBajiResponsePojo);
+    }
+
+    @Override
+    public void sendDataToTransactionApi(JsonObject jsonObject) {
+        repository.hitTransactionApi(jsonObject);
+    }
+
+    @Override
+    public void getDataFromTransactionApi(TransactionResponsePojo transactionResponsePojo) {
+        view.displayResponseFromTransactionApi(transactionResponsePojo);
     }
 }

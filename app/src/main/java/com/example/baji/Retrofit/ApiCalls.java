@@ -6,6 +6,7 @@ import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BajiOnboardL
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.AcceptBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.TransactionResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.OpenBajiListFragment.Model.OpenBajiResponsePojo;
 import com.example.baji.HomeActivity.ProfileFragment.OnboardBaji.Model.ProfileOnboardingBajiListResponsePojo;
 import com.example.baji.HomeActivity.ProfileFragment.OpenBaji.Model.ProfileOpenBajiListResponsePojo;
@@ -67,4 +68,6 @@ public interface ApiCalls {
     @POST("accept/baji")
     Call<AcceptBajiResponsePojo> getAcceptBajiResponse(@Header ("Authorization") String authKey, @Body JsonObject jsonObject);
 
+    @POST("save/transaction")
+    Call<TransactionResponsePojo> getSaveTransactionResponse(@Header ("Authorization") String authKey, @Body JsonObject jsonObject);
 }

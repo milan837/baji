@@ -5,11 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.example.baji.BaseClasses.BaseActivity;
 import com.example.baji.HomeActivity.HomeActivity;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.TransactionResponsePojo;
 import com.example.baji.OnBoardingActivity.OnboardingActivity;
+import com.example.baji.Retrofit.ApiInstance;
+import com.example.baji.Utils.Constant;
+import com.google.gson.JsonObject;
+
+import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashScreen extends BaseActivity {
 
@@ -44,4 +57,5 @@ public class SplashScreen extends BaseActivity {
             }
         }.start();
     }
+
 }

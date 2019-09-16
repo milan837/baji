@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.AcceptBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.CreateNewBajiResponsePojo;
 import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.PaytmChecksumResponsePojo;
+import com.example.baji.HomeActivity.MatchesFragment.MatchesProfile.BottomFragment.PaymentMethod.Model.TransactionResponsePojo;
 import com.example.baji.R;
 import com.example.baji.Utils.Constant;
 import com.example.baji.Utils.Utils;
@@ -31,6 +32,7 @@ import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import com.paytm.pgsdk.easypay.actions.CustomProgressDialog;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -145,6 +147,7 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
 
                 // making call to api after payment is completed sucessfull
                 if(responseCode.equals("01")){
+                    callTransactionApi();
                     if(type.equals("accept")){
                         callAcceptBajiApi();
                     }else if(type.equals("create")){
@@ -153,8 +156,6 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
                 }else{
                     Toast.makeText(getActivity(),responseMessage,Toast.LENGTH_LONG).show();
                 }
-
-
             }
             public void networkNotAvailable() {
                 Toast.makeText(getActivity(),"Network not available",Toast.LENGTH_LONG).show();
@@ -191,12 +192,6 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         jsonObject.addProperty("matchesId",matchId);
         jsonObject.addProperty("teamId",teamId);
         jsonObject.addProperty("amount",amount);
-
-        Log.i("molan_log_sa",matchId+"=>"+
-                amount+"=>"+
-                String.valueOf(teamId)+"="+
-                userId);
-
         presenter.sendDataToCreateBajiApi(jsonObject);
     }
 
@@ -207,6 +202,16 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         jsonObject.addProperty("matchesId",matchId);
         jsonObject.addProperty("userId",userId);
         presenter.sendDataToAcceptBajiApi(jsonObject);
+    }
+
+    private void callTransactionApi(){
+        progressDialog.show();
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("orderId",orderId);
+        jsonObject.addProperty("userId",userId);
+        jsonObject.addProperty("amount",amount);
+        jsonObject.addProperty("timeStamp",new Date().getTime());
+        presenter.sendDataToTransactionApi(jsonObject);
     }
 
     @Override
@@ -227,6 +232,11 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         progressDialog.hide();
         progressDialog.dismiss();
         Toast.makeText(getActivity(),createNewBajiResponsePojo.getMessage(),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void displayResponseFromTransactionApi(TransactionResponsePojo transactionResponsePojo) {
+
     }
 
 }
