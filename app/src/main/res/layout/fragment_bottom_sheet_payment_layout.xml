@@ -51,29 +51,29 @@
                 android:fontFamily="@font/medium"
                 android:text="Paytm"/>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/uip"
-                android:textSize="14dp"
-                android:fontFamily="@font/medium"
-                android:text="UPI"/>
+<!--            <RadioButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/uip"-->
+<!--                android:textSize="14dp"-->
+<!--                android:fontFamily="@font/medium"-->
+<!--                android:text="UPI"/>-->
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/phone_pay"
-                android:fontFamily="@font/medium"
-                android:textSize="14dp"
-                android:text="Phone Pay"/>
+<!--            <RadioButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/phone_pay"-->
+<!--                android:fontFamily="@font/medium"-->
+<!--                android:textSize="14dp"-->
+<!--                android:text="Phone Pay"/>-->
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/paypal"
-                android:fontFamily="@font/medium"
-                android:textSize="14dp"
-                android:text="Paypal"/>
+<!--            <RadioButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/paypal"-->
+<!--                android:fontFamily="@font/medium"-->
+<!--                android:textSize="14dp"-->
+<!--                android:text="Paypal"/>-->
 
         </RadioGroup>
 

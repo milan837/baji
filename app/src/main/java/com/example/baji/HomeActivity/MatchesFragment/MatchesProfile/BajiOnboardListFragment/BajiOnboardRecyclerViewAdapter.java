@@ -45,7 +45,7 @@ public class BajiOnboardRecyclerViewAdapter extends RecyclerView.Adapter<BajiOnb
 
         Glide.with(context).load(baji.getTeamTwo().getTeamImageUrl()).into(holder.teamTwoImage);
         Glide.with(context).load(baji.getTeamTwo().getUserImageUrl()).into(holder.teamTwoUserImage);
-        holder.teamOneUsername.setText(baji.getTeamTwo().getUsername());
+        holder.teamTwoUsername.setText(baji.getTeamTwo().getUsername());
 
         holder.amount.setText("₹ "+String.valueOf(baji.getAmount()));
         holder.bajiTime.setText(Utils.getDateFromTimeStamp(baji.getTimeStamp()));

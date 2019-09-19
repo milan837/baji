@@ -4,12 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@drawable/background_cutter_layout">
-
-    </RelativeLayout>
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/background_cutter_layout">
+    </ImageView>
 
     <!-- tool bar -->
     <RelativeLayout

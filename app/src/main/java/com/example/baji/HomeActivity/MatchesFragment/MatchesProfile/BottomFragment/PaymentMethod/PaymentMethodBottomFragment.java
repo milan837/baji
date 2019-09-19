@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -45,6 +46,9 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
 
     @BindView(R.id.next_button)
     RelativeLayout nextButton;
+
+    @BindView(R.id.paytm)
+    RadioButton patymRadioBtn;
 
     PayMentMethodBottomPresenter presenter;
 
@@ -104,7 +108,12 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callPaytmChecksumApi(paytmAmount,orderId,customerId);
+
+                if(patymRadioBtn.isChecked()){
+                    callPaytmChecksumApi(paytmAmount,orderId,customerId);
+                }else{
+                    Toast.makeText(getActivity(),"please select the payment method",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -178,7 +187,6 @@ public class PaymentMethodBottomFragment extends BottomSheetDialogFragment imple
         });
 
     }
-
 
     private void callPaytmChecksumApi(String amount,String orderId,String customerId){
         progressDialog.show();

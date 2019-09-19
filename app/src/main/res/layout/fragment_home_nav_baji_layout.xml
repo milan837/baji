@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@drawable/background_cutter_layout"
-        />
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/background_cutter_layout">
+    </ImageView>
 
 
     <androidx.core.widget.NestedScrollView
