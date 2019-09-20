@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//@Transactional
+@Transactional
 public interface AcceptBidsRepository extends CrudRepository<AcceptBids,Integer> {
 
     @Query(value = "select * from accept_bids where open_bids_id=?1",nativeQuery = true)
@@ -18,6 +18,9 @@ public interface AcceptBidsRepository extends CrudRepository<AcceptBids,Integer>
     Page<AcceptBids> findAllByMatchesId(int matchesId, Pageable pageable);
 
     Page<AcceptBids> findAllByUserId(int userId,Pageable pageable);
+
+    @Query(value = "select * from accept_bids,open_bids where (accept_bids.user_id=?1 and accept_bids.open_bids_id=open_bids.id) or (open_bids.user_id=?1 and accept_bids.open_bids_id=open_bids.id)",nativeQuery = true)
+    List<AcceptBids> findAllByUserId(int userId);
 
     Page<AcceptBids> findAll(Pageable pageable);
 

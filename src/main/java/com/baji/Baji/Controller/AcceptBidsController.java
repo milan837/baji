@@ -166,8 +166,8 @@ public class AcceptBidsController {
                     int userId=Integer.valueOf(request.get("userId").toString());
                     int page=Integer.valueOf(request.get("page").toString());
 
-                    Page<AcceptBids> acceptBids=repository.findAllByUserId(userId, PageRequest.of(page,size, Sort.by("id").descending()));
-                    acceptBids.getContent().forEach(s->{
+                    List<AcceptBids> acceptBids=repository.findAllByUserId(userId);
+                    acceptBids.forEach(s->{
 
                         Map<String,Object> teamOne=new HashMap<>();
                         Map<String,Object> teamTwo=new HashMap<>();
@@ -196,8 +196,8 @@ public class AcceptBidsController {
                         onBoardBajiList.add(onBoardBaji);
                     });
 
-                    response.put("size",acceptBids.getSize());
-                    response.put("page",acceptBids.getNumber());
+                    response.put("size",acceptBids.size());
+                    response.put("page",acceptBids.size());
                     response.put("status", "200");
                     response.put("message", "on bording baji list");
                     response.put("onboardBaji",onBoardBajiList);
