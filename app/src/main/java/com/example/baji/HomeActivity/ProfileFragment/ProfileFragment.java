@@ -21,11 +21,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.baji.BaseClasses.BaseFragment;
+import com.example.baji.HomeActivity.ProfileFragment.Model.WithDrawAmountPojo;
 import com.example.baji.HomeActivity.ProfileFragment.OnboardBaji.OnboardingBajiListFragment;
 import com.example.baji.HomeActivity.ProfileFragment.OpenBaji.OpenBajiListFragment;
 import com.example.baji.NotificationActivity.NotificationActivity;
 import com.example.baji.R;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonObject;
 
 import org.w3c.dom.Text;
 
@@ -35,7 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfileFragment extends BaseFragment {
+public class ProfileFragment extends BaseFragment implements ProfilePresenter.ProfilePresenterListener{
 
     @BindView(R.id.username)
     TextView usernameTxt;
@@ -72,6 +74,7 @@ public class ProfileFragment extends BaseFragment {
     List<Fragment> fragmentList=new ArrayList<>();
 
     String username,amount,userId,imageUrl,totalBaji,totalWinBaji,totalLoseBaji;
+    ProfilePresenter profilePresenter;
 
     @Nullable
     @Override
@@ -89,6 +92,7 @@ public class ProfileFragment extends BaseFragment {
         amount=sharedPreferences.getString("amount",null);
         username=sharedPreferences.getString("username",null);
         imageUrl=sharedPreferences.getString("imageUrl",null);
+        profilePresenter=new ProfilePresenter(getActivity(),this);
 //        totalBaji=sharedPreferences.getString("totalBaji",null);
 //        totalLoseBaji=sharedPreferences.getString("totalLoseBaji",null);
 //        totalWinBaji=sharedPreferences.getString("totalWinBaji",null);
@@ -138,7 +142,11 @@ public class ProfileFragment extends BaseFragment {
         withDrawBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"taking amount",Toast.LENGTH_LONG).show();
+                showProgress();
+                withDrawBtn.setText("Requested");
+                JsonObject jsonObject=new JsonObject();
+                jsonObject.addProperty("userId",userId);
+                profilePresenter.hitWithDrawApi(jsonObject);
             }
         });
 
@@ -152,4 +160,15 @@ public class ProfileFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onWithDrawBtnSucess(WithDrawAmountPojo withDrawAmountPojo) {
+        dismissProgress();
+        showShortToast(getActivity(),withDrawAmountPojo.getMessage());
+    }
+
+    @Override
+    public void onWithDrawBtnFailure() {
+        dismissProgress();
+        showShortToast(getActivity(),"Api Failure");
+    }
 }
