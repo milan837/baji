@@ -1,12 +1,15 @@
 package com.baji.Baji.Controller;
 
 import com.baji.Baji.Model.AcceptBids;
+import com.baji.Baji.Model.AmountRequest;
 import com.baji.Baji.Model.OpenBids;
 import com.baji.Baji.Model.User;
 import com.baji.Baji.Repository.AcceptBidsRepository;
+import com.baji.Baji.Repository.AmountRequestRepositiory;
 import com.baji.Baji.Repository.OpenBidsRepository;
 import com.baji.Baji.Repository.UserRepository;
 import com.baji.Baji.Utils.Constant;
+import com.baji.Baji.Utils.Utils;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RestController
@@ -25,6 +30,9 @@ public class UserController {
     UserRepository repository;
     @Autowired
     AcceptBidsRepository acceptBidsRepository;
+
+    @Autowired
+    AmountRequestRepositiory amountRequestRepository;
 
     @Autowired
     OpenBidsRepository openBidsRepository;
@@ -317,6 +325,40 @@ public class UserController {
     @GetMapping("/test")
     public String getTest(){
         return "ok";
+    }
+
+    @PostMapping("/withdraw/request")
+    public Map<String,Object> getWithDrawAmountResponse(@RequestHeader("Authorization") String authKey,@RequestBody Map<String,Object> request){
+        response=new HashMap<>();
+
+        if(authKey != null && !authKey.isEmpty()){
+            if(repository.existsByAuthKey(authKey)){
+
+                if(request.containsKey("userId")){
+                    String userId=request.get("userId").toString();
+                    User user=repository.findById(Integer.valueOf(userId)).get();
+                    AmountRequest amountRequest=new AmountRequest();
+                    amountRequest.setStatus(1);
+                    amountRequest.setUser(user);
+                    amountRequest.setDate(Utils.getCurrentDate());
+
+                    amountRequestRepository.save(amountRequest);
+                    response.put("status","200");
+                    response.put("message","Requested Sucessfully");
+                }else{
+                    response.put("status","200");
+                    response.put("message","request body is missing some field");
+                }
+            }else{
+                response.put("status","200");
+                response.put("message","unAuthorize Auth key");
+            }
+        }else{
+            response.put("status","200");
+            response.put("message","auth key not pass");
+        }
+
+        return response;
     }
 
 }
