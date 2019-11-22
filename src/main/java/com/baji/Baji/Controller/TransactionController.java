@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class TransactionController {
     Map<String,Object> response;

@@ -13,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class OpenBidsController {
     Map<String,Object> response;
